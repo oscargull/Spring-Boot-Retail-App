@@ -1,5 +1,5 @@
 package com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.entities;
-
+//Quandale dingle here
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
