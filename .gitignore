@@ -4,6 +4,9 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+#for database connection string
+application.properties
+
 ### STS ###
 .apt_generated
 .classpath

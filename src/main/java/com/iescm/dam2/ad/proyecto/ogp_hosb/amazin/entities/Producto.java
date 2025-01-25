@@ -1,13 +1,11 @@
 package com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+
+import java.sql.Blob;
 
 @Entity
 @Table(name="Productos")
@@ -26,12 +24,14 @@ public class Producto {
 
     private String categoria;
 
+    @NotNull(message = "El precio no puede ser nulo")
     @DecimalMin(value = "0.0", inclusive = false, message = "El precio debe ser mayor que 0")
     private Double precio;
 
-    
-    @NotNull(message = "El almacén no puede ser nulo")
-    private Long almacen_id;
+    private Integer stock;
+
+    @Lob
+    private Blob imagen;
 
     public Long getProducto_id() {
         return producto_id;
@@ -63,14 +63,16 @@ public class Producto {
     public void setPrecio(Double precio) {
         this.precio = precio;
     }
-
-
-
-    public Long getAlmacen_id() {
-        return almacen_id;
+    public Integer getStock() {
+        return stock;
     }
-    public void setAlmacen_id(Long almacen_id) {
-        this.almacen_id = almacen_id;
+    public void setStock(Integer stock) {
+        this.stock = stock;
     }
-
+    public Blob getImagen() {
+        return imagen;
+    }
+    public void setImagen(Blob imagen) {
+        this.imagen = imagen;
+    }
 }

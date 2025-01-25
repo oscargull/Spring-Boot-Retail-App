@@ -2,11 +2,7 @@ package com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.entities;
 
 import java.util.Date;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -18,7 +14,10 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pedido_id;
 
-    private Boolean enviado;
+    @Enumerated(EnumType.STRING)
+    private Estado estado;
+
+    private Date fecha_de_pedido;
 
     private Date fecha_de_llegada;
 
@@ -31,6 +30,9 @@ public class Pedido {
     @NotNull(message = "El producto no puede ser nulo")
     private Long producto_id;
 
+    @NotNull(message = "El destino no puede ser nulo")
+    private Long destino_id;
+
     
     public Long getPedido_id() {
         return pedido_id;
@@ -40,12 +42,20 @@ public class Pedido {
         this.pedido_id = pedido_id;
     }
 
-    public Boolean getEnviado() {
-        return enviado;
+    public Estado getEstado() {
+        return estado;
     }
 
-    public void setEnviado(Boolean enviado) {
-        this.enviado = enviado;
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
+
+    public Date getFecha_de_pedido() {
+        return fecha_de_pedido;
+    }
+
+    public void setFecha_de_pedido(Date fecha_de_pedido) {
+        this.fecha_de_pedido = fecha_de_pedido;
     }
 
     public Date getFecha_de_llegada() {
@@ -64,10 +74,6 @@ public class Pedido {
         this.descripcion = descripcion;
     }
 
-
-
-
-
     public Long getAlmacen_id() {
         return almacen_id;
     }
@@ -84,5 +90,19 @@ public class Pedido {
         this.producto_id = producto_id;
     }
 
-    
+    public Long getDestino_id() {
+        return destino_id;
+    }
+
+    public void setDestino_id(Long destino_id) {
+        this.destino_id = destino_id;
+    }
+
+
+    public enum Estado {
+        ENVIADO,
+        PLANIFICADO,
+        FINALIZADO,
+        CANCELADO
+    }
 }

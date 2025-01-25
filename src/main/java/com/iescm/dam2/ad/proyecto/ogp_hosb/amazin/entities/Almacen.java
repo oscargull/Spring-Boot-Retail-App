@@ -23,8 +23,10 @@ public class Almacen {
     @NotNull(message = "Debe indicar la capacidad máxima del almacén.")
     private Integer capacidad_max;
 
+    private Integer ocupacion;
+
     @Size(min = 3, max = 50, message = "El nombre solo puede tener entre 3 y 50 caracteres")
-    private String localizacion;
+    private String direccion;
 
     @Size(min = 9, max = 9, message = "Número de teléfono inválido")
     private String telefono;
@@ -47,11 +49,17 @@ public class Almacen {
     public void setCapacidad_max(Integer capacidad_max) {
         this.capacidad_max = capacidad_max;
     }
-    public String getLocalizacion() {
-        return localizacion;
+    public Integer getOcupacion() {
+        return ocupacion;
     }
-    public void setLocalizacion(String localizacion) {
-        this.localizacion = localizacion;
+    public void setOcupacion(Integer ocupacion) {
+        this.ocupacion = ocupacion;
+    }
+    public String getDireccion() {
+        return direccion;
+    }
+    public void setDireccion(String localizacion) {
+        this.direccion = direccion;
     }
     public String getTelefono() {
         return telefono;
