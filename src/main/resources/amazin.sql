@@ -18,15 +18,6 @@ CREATE TABLE Productos(
 	imagen blob
 );
 
-CREATE TABLE AlmacenesProductos (
-    almacen_id BIGINT,
-    producto_id BIGINT,
-    cantidad INT NOT NULL,
-    PRIMARY KEY (almacen_id, producto_id),
-    FOREIGN KEY (almacen_id) REFERENCES Almacenes(almacen_id),
-    FOREIGN KEY (producto_id) REFERENCES Productos(producto_id)
-);
-
 CREATE TABLE Destinos(
 	destino_id BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 	nombre varchar(50) NOT NULL,
@@ -54,6 +45,30 @@ CREATE TABLE Usuarios(
 	nombre varchar(100),
 	email varchar(100)
 );
+
+INSERT INTO Productos (nombre, descripcion, categoria, precio, stock)
+VALUES 
+('Auriculares Bluetooth', 'Auriculares inalámbricos con sonido de alta calidad y batería de larga duración.', 'Electrónica', 59.99, 80),
+('Mochila Deportiva', 'Mochila resistente al agua, ideal para deportes y actividades al aire libre.', 'Ropa', 35.50, 60),
+('Lámpara LED', 'Lámpara moderna con luz regulable, perfecta para estudios y oficinas.', 'Iluminación', 22.90, 120),
+('Reloj Inteligente', 'Reloj con pantalla táctil, monitor de actividad y notificaciones al alcance de tu muñeca.', 'Electrónica', 99.99, 70),
+('Cartera de Cuero', 'Cartera elegante de cuero genuino con varios compartimentos.', 'Accesorios', 45.00, 150),
+('Guitarra Eléctrica', 'Guitarra eléctrica para principiantes con todo lo necesario para comenzar a tocar.', 'Instrumentos', 199.00, 25),
+('Chaqueta de Invierno', 'Chaqueta acolchonada, ideal para las bajas temperaturas invernales.', 'Ropa', 75.99, 90),
+('Silla Eléctrica', 'Silla ergonómica para gamers, con múltiples ajustes y gran comodidad.', 'Muebles', 150.00, 40),
+('Patinete Eléctrico', 'Patinete eléctrico plegable, con batería de larga duración y velocidad máxima de 25 km/h.', 'Electrónica', 349.99, 15),
+('Cámara de Seguridad', 'Cámara IP de alta definición con visión nocturna, ideal para proteger tu hogar.', 'Electrónica', 69.99, 50),
+('Sofá de 3 Plazas', 'Sofá de diseño moderno y cómodo, perfecto para el salón de tu hogar.', 'Muebles', 350.00, 15),
+('Termo de Acero Inoxidable', 'Termo para bebidas calientes o frías, con capacidad de 1 litro y diseño compacto.', 'Accesorios', 25.99, 80),
+('Bicicleta de Montaña', 'Bicicleta resistente, ideal para rutas de montaña y terrenos difíciles.', 'Deportes', 220.00, 30),
+('Hidratante Facial', 'Crema hidratante de alta calidad, ideal para pieles sensibles.', 'Cosméticos', 18.50, 200),
+('Cámara Instantánea', 'Cámara fotográfica que imprime tus fotos al instante, perfecta para eventos y recuerdos.', 'Electrónica', 85.00, 50),
+('Manta de Lana', 'Manta suave y cálida, ideal para las noches frías de invierno.', 'Ropa', 40.00, 120),
+('Taza de Cerámica', 'Taza de cerámica con diseño exclusivo, perfecta para tus bebidas calientes.', 'Accesorios', 10.00, 250),
+('Pantalones Vaqueros', 'Jeans de corte clásico, cómodos y de excelente ajuste.', 'Ropa', 29.99, 100),
+('Lentes de Sol', 'Lentes de sol con protección UV, de diseño moderno y elegante.', 'Accesorios', 40.00, 150, NULL),
+('Freidora de Aire', 'Freidora sin aceite para cocinar de manera más saludable, con múltiples funciones.', 'Electrodomésticos', 120.00, 40, NULL);
+
 
 
 
