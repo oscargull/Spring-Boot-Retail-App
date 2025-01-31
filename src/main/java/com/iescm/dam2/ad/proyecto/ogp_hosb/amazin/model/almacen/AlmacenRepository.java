@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @Repository
-public interface AlmacenRepository extends JpaRepository<Pedido, Long>{
+public interface AlmacenRepository extends JpaRepository<Almacen, Long>{
 
     @Query(value = "SELECT a FROM Almacenes a WHERE capacidad_max>:capacidad_max",nativeQuery = true)
     List<Almacen> buscarPorCapacidadMaxima (@Param("capacidad_max") Integer capcidad_max);
