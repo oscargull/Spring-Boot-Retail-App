@@ -1,4 +1,4 @@
-package com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.entities;
+package com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.usuario;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -1,4 +1,4 @@
-package com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.entities;
+package com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.destino;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
