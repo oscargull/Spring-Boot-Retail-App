@@ -26,7 +26,7 @@ public class ProductoService implements ProductoServiceInterface{
                 producto.setPrecio(productoActualizado.getPrecio());
                 producto.setStock(productoActualizado.getStock());
                 producto.setImagen(productoActualizado.getImagen());
-            return repository.save(producto);
+                return repository.save(producto);
         }).orElse(null);
     }
 
@@ -47,8 +47,16 @@ public class ProductoService implements ProductoServiceInterface{
     }
 
     @Override
+    public List<Producto> listarPorPrecioMayorQue(Double precio) {
+        return repository.buscarPorPrecioMayorQue(precio);
+    }  
+
+
+    @Override
     public Optional<Producto> obtenerPorId(Long id) {
         return repository.findById(id);
-    }  
+    }
+
+  
     
 }

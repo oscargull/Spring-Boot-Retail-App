@@ -6,8 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.producto.Producto;
-
 @Service
 public class AlmacenService implements AlmacenServiceInterface{
 
@@ -27,31 +25,30 @@ public class AlmacenService implements AlmacenServiceInterface{
             almacen.setOcupacion(almacenActualizado.getOcupacion());
             almacen.setDireccion(almacenActualizado.getDireccion());
             almacen.setTelefono(almacenActualizado.getTelefono());
-        return repository.save(producto);
-    }).orElse(null);    }
+            return repository.save(almacen);
+        }).orElse(null);    
+    }
 
     @Override
     public void eliminarAlmacen(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'eliminarAlmacen'");
+        repository.deleteById(id);
+    }
+
+
+    @Override
+    public List<Almacen> listarAlmacenes() {
+        return repository.findAll();
     }
 
     @Override
-    public List<Producto> listarAlmacenes() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listarAlmacenes'");
+    public List<Almacen> listarPorCapacidadMaxima() {
+        return repository.buscarPorCapacidadMaxima();
+
     }
 
     @Override
-    public List<Producto> listarPorCapacidadMaxima(String categoria) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listarPorCapacidadMaxima'");
-    }
-
-    @Override
-    public Optional<Producto> obtenerPorId(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'obtenerPorId'");
+    public Optional<Almacen> obtenerPorId(Long id) {
+        return repository.findById(id);
     }
 
 }

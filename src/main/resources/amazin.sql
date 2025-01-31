@@ -66,8 +66,8 @@ VALUES
 ('Manta de Lana', 'Manta suave y cálida, ideal para las noches frías de invierno.', 'Ropa', 40.00, 120),
 ('Taza de Cerámica', 'Taza de cerámica con diseño exclusivo, perfecta para tus bebidas calientes.', 'Accesorios', 10.00, 250),
 ('Pantalones Vaqueros', 'Jeans de corte clásico, cómodos y de excelente ajuste.', 'Ropa', 29.99, 100),
-('Lentes de Sol', 'Lentes de sol con protección UV, de diseño moderno y elegante.', 'Accesorios', 40.00, 150, NULL),
-('Freidora de Aire', 'Freidora sin aceite para cocinar de manera más saludable, con múltiples funciones.', 'Electrodomésticos', 120.00, 40, NULL);
+('Lentes de Sol', 'Lentes de sol con protección UV, de diseño moderno y elegante.', 'Accesorios', 40.00, 150),
+('Freidora de Aire', 'Freidora sin aceite para cocinar de manera más saludable, con múltiples funciones.', 'Electrodomésticos', 120.00, 40);
 
 
 

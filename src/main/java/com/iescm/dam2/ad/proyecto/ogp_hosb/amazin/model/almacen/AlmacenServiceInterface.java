@@ -8,12 +8,12 @@ import com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.producto.Producto;
 public interface AlmacenServiceInterface {
 
     public Almacen crearAlmacen(Almacen almacen);
-    public Almacen actualizarAlmacen(Long id, Producto almacenActualizado);
+    public Almacen actualizarAlmacen(Long id, Almacen almacenActualizado);
     public void eliminarAlmacen(Long id);
 
-    public List<Producto> listarAlmacenes();
-    public List<Producto> listarPorCapacidadMaxima(String categoria);
+    public List<Almacen> listarAlmacenes();
+    public List<Almacen> listarPorCapacidadMaxima();
 
-    public Optional<Producto> obtenerPorId(Long id);
+    public Optional<Almacen> obtenerPorId(Long id);
 
 }

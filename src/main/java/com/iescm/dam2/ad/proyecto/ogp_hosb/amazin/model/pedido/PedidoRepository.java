@@ -15,8 +15,10 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long>{
     List<Pedido> buscarPorEstado(@Param("estado") String estado);
 
     @Query("SELECT p FROM Pedido WHERE p.almacen_id =:almacen_id")
-    List<Pedido> buscarPorAlmacen(@Param("almacen_id") String almacen_id);
+    List<Pedido> buscarPorAlmacen(@Param("almacen_id") Long almacen_id);
 
     @Query("SELECT p FROM Pedido WHERE p.destino_id =:destino_id")
-    List<Pedido> buscarPorDestino(@Param("destino_id") String destino_id);
+    List<Pedido> buscarPorDestino(@Param("destino_id") Long destino_id);
+
+    //cambiar destino
 }
