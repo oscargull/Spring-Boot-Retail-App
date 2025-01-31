@@ -58,7 +58,7 @@ public class Almacen {
     public String getDireccion() {
         return direccion;
     }
-    public void setDireccion(String localizacion) {
+    public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
     public String getTelefono() {
