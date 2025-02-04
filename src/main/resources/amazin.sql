@@ -1,4 +1,4 @@
-CREATE TABLE Almacenes(
+CREATE TABLE almacenes(
 	almacen_id BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     nombre VARCHAR(100) NOT NULL,                       
     capacidad_max INT NOT NULL,
@@ -8,7 +8,7 @@ CREATE TABLE Almacenes(
 );
 
 
-CREATE TABLE Productos(
+CREATE TABLE productos(
 	producto_id BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 	nombre varchar(50) NOT NULL,
 	descripcion varchar(250),
@@ -18,14 +18,14 @@ CREATE TABLE Productos(
 	imagen blob
 );
 
-CREATE TABLE Destinos(
+CREATE TABLE destinos(
 	destino_id BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 	nombre varchar(50) NOT NULL,
 	distancia double NOT NULL,
 	direccion VARCHAR(255)
 );
 
-CREATE TABLE Pedidos (
+CREATE TABLE pedidos (
 	pedido_id BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 	estado ENUM('ENVIADO', 'PLANIFICADO', 'FINALIZADO', 'CANCELADO') DEFAULT 'PLANIFICADO',
 	fecha_de_pedido DATE,
@@ -33,12 +33,12 @@ CREATE TABLE Pedidos (
     almacen_id BIGINT,
     producto_id BIGINT,
     destino_id BIGINT,
-    FOREIGN KEY (almacen_id) REFERENCES Almacenes(almacen_id), 
-    FOREIGN KEY (producto_id) REFERENCES Productos(producto_id),
-	FOREIGN KEY (destino_id) REFERENCES Destinos(destino_id)
+    FOREIGN KEY (almacen_id) REFERENCES almacenes(almacen_id), 
+    FOREIGN KEY (producto_id) REFERENCES productos(producto_id),
+	FOREIGN KEY (destino_id) REFERENCES destinos(destino_id)
 );
 
-CREATE TABLE Usuarios(
+CREATE TABLE usuarios(
 	usuario_id BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL ,
 	nom_usuario varchar(20) UNIQUE NOT NULL ,
 	passw varchar(255) NOT NULL,	
@@ -46,9 +46,9 @@ CREATE TABLE Usuarios(
 	email varchar(100)
 );
 
-insert into  Usuarios(nom_usuario,passw,email) values('admin','$2a$12$dLuG3q.fJty6l1gTYLZ2fe2FgsvdmXOQrN7iXfw/q5FwlIy5XRkyi','admin@quandaledingle.com'); 
+insert into  usuarios(nom_usuario,passw,email) values('admin','$2a$12$dLuG3q.fJty6l1gTYLZ2fe2FgsvdmXOQrN7iXfw/q5FwlIy5XRkyi','admin@quandaledingle.com'); 
 
-INSERT INTO Destinos (nombre, distancia, direccion) 
+INSERT INTO destinos (nombre, distancia, direccion) 
 VALUES
   ('Madrid', 0.0, 'Puerta del Sol, Madrid, España'),
   ('Barcelona', 620.5, 'La Rambla, Barcelona, España'),
@@ -58,7 +58,7 @@ VALUES
   ('Bilbao', 650.7, 'Museo Guggenheim, Bilbao, España'),
   ('Málaga', 530.4, 'Calle Larios, Málaga, España');
 
-INSERT INTO Productos (nombre, descripcion, categoria, precio, stock)
+INSERT INTO productos(nombre, descripcion, categoria, precio, stock)
 VALUES 
 ('Auriculares Bluetooth', 'Auriculares inalámbricos con sonido de alta calidad y batería de larga duración.', 'Electrónica', 59.99, 80),
 ('Mochila Deportiva', 'Mochila resistente al agua, ideal para deportes y actividades al aire libre.', 'Ropa', 35.50, 60),

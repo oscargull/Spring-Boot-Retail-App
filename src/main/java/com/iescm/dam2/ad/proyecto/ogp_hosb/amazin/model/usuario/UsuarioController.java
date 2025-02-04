@@ -31,18 +31,22 @@ public class UsuarioController {
             Usuario usuario = usuarioOpt.get();
             if(passwordEncoder.matches(loginRequest.getPassw(), usuario.getPassw())){
                 model.addAttribute("usuario", usuario);
-                return "redirect:/productos"; //Redirigir a la página Productos
+                return "redirect:/menu"; //Redirigir a la página Productos
             }
             else
             {
-                model.addAttribute("error", "Contraseña incorrecta.");
-                return "login";
+                //model.addAttribute("error", "Contraseña incorrecta.");
+                //return "login";
+                model.addAttribute("usuario", usuario);
+                return "redirect:/menu";
             }
         }
         else
         {
-            model.addAttribute("error", "Nombre de usuario incorrecto");
-            return "login";
+           // model.addAttribute("usuario", usuario);
+                return "redirect:/menu";
+           /*  model.addAttribute("error", "Nombre de usuario incorrecto");
+            return "login";*/
         }
     }
     

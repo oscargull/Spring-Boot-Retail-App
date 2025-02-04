@@ -3,7 +3,6 @@ package com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.almacen;
 import java.util.List;
 import java.util.Optional;
 
-import com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.producto.Producto;
 
 public interface AlmacenServiceInterface {
 
@@ -15,5 +14,8 @@ public interface AlmacenServiceInterface {
     public List<Almacen> listarPorCapacidadMaxima();
 
     public Optional<Almacen> obtenerPorId(Long id);
+
+    /*public List<Long> getAlmacenIds();
+    public List<String> getAlmacenNombres();*/
 
 }

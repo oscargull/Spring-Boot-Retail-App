@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Size;
 import java.sql.Blob;
 
 @Entity
-@Table(name="Productos")
+@Table(name="productos")
 public class Producto {
 
     @Id

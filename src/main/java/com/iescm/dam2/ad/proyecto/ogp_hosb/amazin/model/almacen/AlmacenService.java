@@ -52,4 +52,14 @@ public class AlmacenService implements AlmacenServiceInterface{
         return repository.findById(id);
     }
 
+   /*  @Override
+    public List<Long> getAlmacenIds() {
+        return  repository.getAlmacenIds();
+    }
+
+    @Override
+    public List<String> getAlmacenNombres() {
+       return repository.getAlmacenNombres();
+}*/
+
 }

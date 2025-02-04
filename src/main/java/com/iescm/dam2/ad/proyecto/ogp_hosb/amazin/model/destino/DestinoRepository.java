@@ -10,4 +10,5 @@ import com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.pedido.Pedido;
 @Repository
 public interface DestinoRepository extends JpaRepository<Destino, Long>{
 
+    
 }

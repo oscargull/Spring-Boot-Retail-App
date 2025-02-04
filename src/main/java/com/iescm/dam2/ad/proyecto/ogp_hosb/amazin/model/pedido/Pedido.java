@@ -1,5 +1,6 @@
 package com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.pedido;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import jakarta.persistence.*;
@@ -7,7 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name="Pedidos")
+@Table(name="pedidos")
 public class Pedido {
 
     @Id
@@ -17,17 +18,17 @@ public class Pedido {
     @Enumerated(EnumType.STRING)
     private Estado estado;
 
-    private Date fecha_de_pedido;
+    private LocalDate fecha_de_pedido;
 
-    private Date fecha_de_llegada;
+    private LocalDate fecha_de_llegada;
 
     @Size(max = 255, message = "Descripción máximo 255 caracteres.")
     private String descripcion;
 
-    @NotNull(message = "El almacén no puede ser nulo")
+    //@NotNull(message = "El almacén no puede ser nulo")
     private Long almacen_id;
     
-    @NotNull(message = "El producto no puede ser nulo")
+   // @NotNull(message = "El producto no puede ser nulo")
     private Long producto_id;
 
     @NotNull(message = "El destino no puede ser nulo")
@@ -50,19 +51,19 @@ public class Pedido {
         this.estado = estado;
     }
 
-    public Date getFecha_de_pedido() {
+    public LocalDate getFecha_de_pedido() {
         return fecha_de_pedido;
     }
 
-    public void setFecha_de_pedido(Date fecha_de_pedido) {
+    public void setFecha_de_pedido(LocalDate fecha_de_pedido) {
         this.fecha_de_pedido = fecha_de_pedido;
     }
 
-    public Date getFecha_de_llegada() {
+    public LocalDate getFecha_de_llegada() {
         return fecha_de_llegada;
     }
 
-    public void setFecha_de_llegada(Date fecha_de_llegada) {
+    public void setFecha_de_llegada(LocalDate fecha_de_llegada) {
         this.fecha_de_llegada = fecha_de_llegada;
     }
 
