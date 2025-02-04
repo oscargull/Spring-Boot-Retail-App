@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface AlmacenRepository extends JpaRepository<Almacen, Long>{
 
-    @Query("SELECT a FROM Almacen a ORDER BY a.capacidadMax DESC")
+    @Query("SELECT a FROM Almacen a ORDER BY a.capacidad_max DESC")
     List<Almacen> buscarPorCapacidadMaxima();
 
 }

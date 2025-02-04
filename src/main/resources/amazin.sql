@@ -46,6 +46,18 @@ CREATE TABLE Usuarios(
 	email varchar(100)
 );
 
+insert into  Usuarios(nom_usuario,passw,email) values('admin','$2a$12$dLuG3q.fJty6l1gTYLZ2fe2FgsvdmXOQrN7iXfw/q5FwlIy5XRkyi','admin@quandaledingle.com'); 
+
+INSERT INTO Destinos (nombre, distancia, direccion) 
+VALUES
+  ('Madrid', 0.0, 'Puerta del Sol, Madrid, España'),
+  ('Barcelona', 620.5, 'La Rambla, Barcelona, España'),
+  ('Sevilla', 540.3, 'Plaza de España, Sevilla, España'),
+  ('Valencia', 350.2, 'Plaza del Ayuntamiento, Valencia, España'),
+  ('Granada', 430.1, 'Alhambra, Granada, España'),
+  ('Bilbao', 650.7, 'Museo Guggenheim, Bilbao, España'),
+  ('Málaga', 530.4, 'Calle Larios, Málaga, España');
+
 INSERT INTO Productos (nombre, descripcion, categoria, precio, stock)
 VALUES 
 ('Auriculares Bluetooth', 'Auriculares inalámbricos con sonido de alta calidad y batería de larga duración.', 'Electrónica', 59.99, 80),

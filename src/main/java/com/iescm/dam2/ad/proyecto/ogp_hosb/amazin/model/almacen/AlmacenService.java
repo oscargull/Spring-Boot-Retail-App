@@ -11,6 +11,7 @@ public class AlmacenService implements AlmacenServiceInterface{
 
     @Autowired
     private AlmacenRepository repository;
+   
 
     @Override
     public Almacen crearAlmacen(Almacen almacen) {
