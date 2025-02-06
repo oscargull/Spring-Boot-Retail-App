@@ -1,12 +1,11 @@
 package com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.almacen;
 //Quandale dingle here
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.producto.Producto;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+
+import java.util.Set;
 
 @Entity
 @Table(name="almacenes")
@@ -30,6 +29,19 @@ public class Almacen {
 
     @Size(min = 9, max = 9, message = "Número de teléfono inválido")
     private String telefono;
+
+
+
+    @ManyToMany(mappedBy = "almacenes")
+    private Set<Producto> productos;
+
+    public Set<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(Set<Producto> productos) {
+        this.productos = productos;
+    }
 
     public Long getAlmacen_id() {
         return almacen_id;
@@ -67,4 +79,5 @@ public class Almacen {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+
 }
