@@ -12,4 +12,11 @@ public class MenuController {
         //model.addAttribute("menu", menu )
         return "menu";
     }
+
+    @GetMapping("/main")
+    public String mainForm(Model model){
+
+        //model.addAttribute("menu", menu )
+        return "main";
+    }
 }

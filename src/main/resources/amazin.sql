@@ -5,8 +5,7 @@ CREATE TABLE almacenes(
     ocupacion INT DEFAULT 0,
     direccion VARCHAR(255),
 	telefono VARCHAR(20),
-	producto_id BIGINT, -- Foreign key here
-    FOREIGN KEY (producto_id) REFERENCES productos(producto_id)
+	producto_id BIGINT -- Foreign key here
 );
 
 

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Almacenes and Destinos</title>
+    <style>
+        .container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .almacen-central, .almacen, .destino {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+        .almacen-central {
+            background-color: red;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+        .almacen { background-color: blue; z-index: 2; }
+        .destino { background-color: green; width: 15px; height: 15px; z-index: 1; cursor: pointer; }
+        .truck {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: orange;
+            border-radius: 5px;
+            z-index: 3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="almacen-central" data-name="Almacén Central"></div>
+        <div class="almacen almacen-north" data-name="Almacén Norte" style="top: 10%; left: 55%; transform: translateX(-50%);"></div>
+        <div class="almacen almacen-south" data-name="Almacén Sur" style="bottom: 20%; left: 43%; transform: translateX(-50%);"></div>
+        <div class="almacen almacen-east" data-name="Almacén Este" style="top: 45%; right: 15%; transform: translateY(-50%);"></div>
+        <div class="almacen almacen-west" data-name="Almacén Oeste" style="top: 40%; left: 20%; transform: translateY(-50%);"></div>
+    
+        <button id="animate-btn">Animacion</button>
+    </div>
+    <script>
+        const container = document.querySelector('.container');
+        const almacenCentral = document.querySelector('.almacen-central');
+
+        const destinos = [
+            { name: "Destino 1", distance: 30 },
+            { name: "Destino 2", distance: 50 },
+            { name: "Destino 3", distance: 70 },
+            { name: "Destino 4", distance: 90 }
+        ];
+        
+        destinos.forEach((destino, index) => {
+            const destinoElement = document.createElement('div');
+            destinoElement.classList.add('destino');
+            destinoElement.setAttribute('data-name', `Destino ${index + 1}`);
+            const angle = (destino.distance / 100) * 2 * Math.PI;
+            const maxRadius = Math.min(window.innerWidth, window.innerHeight) / 2;
+            const radius = (destino.distance / 100) * maxRadius;
+            const xPos = (window.innerWidth / 2) + radius * Math.cos(angle);
+            const yPos = (window.innerHeight / 2) + radius * Math.sin(angle);
+            destinoElement.style.left = `${xPos}px`;
+            destinoElement.style.top = `${yPos}px`;
+            container.appendChild(destinoElement);
+        });
+        
+        function animateTruck(startX, startY, endX, endY) {
+            const truck = document.createElement('div');
+            truck.classList.add('truck');
+            truck.style.left = `${startX}px`;
+            truck.style.top = `${startY}px`;
+            container.appendChild(truck);
+            
+            truck.animate([
+                { left: `${startX}px`, top: `${startY}px` },
+                { left: `${endX}px`, top: `${endY}px` }
+            ], {
+                duration: 3000,
+                fill: 'forwards',
+                easing: 'linear'
+            });
+        }
+        
+        document.querySelectorAll('.destino').forEach(destino => {
+            destino.addEventListener('click', () => {
+                const startX = almacenCentral.offsetLeft + almacenCentral.offsetWidth / 2;
+                const startY = almacenCentral.offsetTop + almacenCentral.offsetHeight / 2;
+                const endX = destino.offsetLeft + destino.offsetWidth / 2;
+                const endY = destino.offsetTop + destino.offsetHeight / 2;
+                animateTruck(startX, startY, endX, endY);
+            });
+        });
+
+        const boton = document.getElementById("animate-btn");
+   boton.addEventListener('click', () => { 
+        console.log("Button clicked");
+        const randomDestino = Math.floor(Math.random() * 4) + 1;
+        const destino = document.querySelector(`.destino[data-name="Destino ${randomDestino}"]`);
+        const almacen = document.querySelector('.almacen-central');
+        const startX = almacen.offsetLeft + almacen.offsetWidth / 2;
+        const startY = almacen.offsetTop + almacen.offsetHeight / 2;
+        const endX = destino.offsetLeft + destino.offsetWidth / 2;
+        const endY = destino.offsetTop + destino.offsetHeight / 2;
+        animateTruck(startX, startY, endX, endY);
+    });
+    </script>
+</body>
+</html>
