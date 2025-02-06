@@ -43,7 +43,7 @@ public class HacerPedidoController {
         model.addAttribute("almacenes", almacenes);
         model.addAttribute("productos", productos);
         model.addAttribute("destinos", destinos);
-        return "hacerpedido";
+        return "fragments/modal_hacerpedido :: modal";
     }
 
     @PostMapping("/hacerpedido")

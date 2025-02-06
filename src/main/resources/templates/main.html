@@ -1,9 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Almacenes and Destinos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+
     <style>
         .container {
             position: relative;
@@ -12,58 +18,36 @@
             margin: 0;
             overflow: hidden;
         }
-
-        .almacen-central {
+        .almacen-central, .almacen, .destino {
             position: absolute;
             width: 30px;
             height: 30px;
-            background-color: red;
             border-radius: 50%;
+        }
+        .almacen-central {
+           /* background-color: red;*/
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            z-index: 2; 
+            z-index: 2;
         }
-        .almacen {
+        .almacen { /*background-color: blue;*/ z-index: 2; }
+        .almacen-central img {
+            width: 200px; /* Adjust the width as needed */
+            height: auto; /* Maintain aspect ratio */
+        }
+        .almacen img {
+            width: 100px; /* Adjust the width as needed */
+            height: auto; /* Maintain aspect ratio */
+        }
+        .destino { background-color: green; width: 15px; height: 15px; z-index: 1; cursor: pointer; }
+        .truck {
             position: absolute;
-            width: 30px;
-            height: 30px;
-            background-color: blue;
-            border-radius: 50%;
-            z-index: 2; 
-        }
-
-        .almacen-north {
-            top: 10%;
-            left: 55%;
-            transform: translateX(-50%);
-        }
-
-        .almacen-south {
-            bottom: 20%;
-            left: 43%;
-            transform: translateX(-50%);
-        }
-
-        .almacen-east {
-            top: 45%;
-            right: 15%;
-            transform: translateY(-50%);
-        }
-
-        .almacen-west {
-            top: 40%;
-            left: 20%; 
-            transform: translateY(-50%);
-        }
-
-        .destino {
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background-color: green;
-            border-radius: 50%;
-            z-index: 1; 
+            width: 20px;
+            height: 20px;
+            background-color: orange;
+            border-radius: 5px;
+            z-index: 3;
         }
 
         .modal {
@@ -96,144 +80,143 @@
             cursor: pointer;
             border-radius: 5px;
         }
-        .truck {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: orange;
-            border-radius: 5px;
-            z-index: 3;
-        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="almacen-central"data-name="Almacén Central"></div>
+<div class="container">
+    <div class="almacen-central" data-name="Almacén Central"><img th:src="@{warehouse.png}"></div>
 
-        <div class="almacen almacen-north" data-name="Almacén Norte"></div>
-        <div class="almacen almacen-south" data-name="Almacén Sur"></div>
-        <div class="almacen almacen-east" data-name="Almacén Este"></div>
-        <div class="almacen almacen-west" data-name="Almacén Oeste"></div>
-
-        <button id="animate-btn">Animacion</button>
+    <div class="text-center">
+        <button id="open-modal-btn" class="btn btn-danger btn-lg w-50">
+            Hacer Pedido
+        </button>
     </div>
 
-    <script>
-        const destinos = [
-            { name: "Destino 1", distance: 30 },  
-            { name: "Destino 2", distance: 50 },
-            { name: "Destino 3", distance: 70 },
-            { name: "Destino 4", distance: 90 }
-        ];
+    <!-- Placeholder for Modal -->
 
-        const container = document.querySelector('.container');
-       
-        destinos.forEach((destino, index) => {
-            const destinoElement = document.createElement('div');
-            destinoElement.classList.add('destino');
-            const destinoName = `Destino ${index + 1}`;
-            destinoElement.setAttribute('data-name', destinoName);
+    <div class="almacen almacen-north" data-name="Almacén Norte" style="top: 10%; left: 55%; transform: translateX(-50%);"><img th:src="@{warehouse-small.png}"></div>
+    <div class="almacen almacen-south" data-name="Almacén Sur" style="bottom: 20%; left: 43%; transform: translateX(-50%);"><img th:src="@{warehouse-small.png}"></div>
+    <div class="almacen almacen-east" data-name="Almacén Este" style="top: 45%; right: 15%; transform: translateY(-50%);"><img th:src="@{warehouse-small.png}"></div>
+    <div class="almacen almacen-west" data-name="Almacén Oeste" style="top: 40%; left: 20%; transform: translateY(-50%);"><img th:src="@{warehouse-small.png}"></div>
 
-            const angle =(destino.distance/100) * 2 * Math.PI;
+    <button id="animate-btn">Animacion</button>
+</div>
+<!-- Modals -->
+<div id="modal-container"></div>
 
-            const maxRadius = Math.min(window.innerWidth, window.innerHeight) / 2;
-            const radius = (destino.distance / 100) * maxRadius;
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <h2 id="modal-title">Title</h2>
+        <p id="modal-text">Description of the location.</p>
+        <button class="close-btn" id="close-modal">Close</button>
+    </div>
+</div>
 
-            const xPos = (window.innerWidth / 2) + radius * Math.cos(angle); 
-            const yPos = (window.innerHeight / 2) + radius * Math.sin(angle);
 
-            destinoElement.style.left = `${xPos}px`;
-            destinoElement.style.top = `${yPos}px`;
+<script>
 
-            container.appendChild(destinoElement);
+
+
+    const container = document.querySelector('.container');
+    const almacenCentral = document.querySelector('.almacen-central');
+
+    const destinos = [
+        { name: "Destino 1", distance: 30 },
+        { name: "Destino 2", distance: 50 },
+        { name: "Destino 3", distance: 70 },
+        { name: "Destino 4", distance: 90 }
+    ];
+
+    destinos.forEach((destino, index) => {
+        const destinoElement = document.createElement('div');
+        destinoElement.classList.add('destino');
+        destinoElement.setAttribute('data-name', `Destino ${index + 1}`);
+        const angle = (destino.distance / 100) * 2 * Math.PI;
+        const maxRadius = Math.min(window.innerWidth, window.innerHeight) / 2;
+        const radius = (destino.distance / 100) * maxRadius;
+        const xPos = (window.innerWidth / 2) + radius * Math.cos(angle);
+        const yPos = (window.innerHeight / 2) + radius * Math.sin(angle);
+        destinoElement.style.left = `${xPos}px`;
+        destinoElement.style.top = `${yPos}px`;
+        container.appendChild(destinoElement);
+    });
+
+
+    const modal = document.getElementById("modal");
+    const modalTitle = document.getElementById("modal-title");
+    const modalText = document.getElementById("modal-text");
+    const closeModal = document.getElementById("close-modal");
+
+    function openModal(name) {
+        modalTitle.innerText = name;
+        modalText.innerText = `You clicked on ${name}.`;
+        modal.style.display = "flex";
+    }
+
+    document.querySelectorAll('.almacen, .almacen-central, .destino').forEach(element => {
+        element.addEventListener("click", () => {
+            const name = element.getAttribute("data-name");
+            openModal(name);
         });
+    });
+    closeModal.addEventListener("click", () => {
+        modal.style.display = "none";
+    });
 
-    </script>
-     
- </div>
-
- <!-- Modals -->
- <div class="modal" id="modal">
-     <div class="modal-content">
-         <h2 id="modal-title">Title</h2>
-         <p id="modal-text">Description of the location.</p>
-         <button class="close-btn" id="close-modal">Close</button>
-     </div>
- </div>
- 
-
- <script>
-     const modal = document.getElementById("modal");
-     const modalTitle = document.getElementById("modal-title");
-     const modalText = document.getElementById("modal-text");
-     const closeModal = document.getElementById("close-modal");
-
-     function openModal(name) {
-         modalTitle.innerText = name;
-         modalText.innerText = `You clicked on ${name}.`;
-         modal.style.display = "flex";
-     }
-
-     function animateTruck(startX, startY, endX, endY) {
-            const truck = document.createElement('div');
-            truck.classList.add('truck');
-            truck.style.left = `${startX}px`;
-            truck.style.top = `${startY}px`;
-            container.appendChild(truck);
-            
-            truck.animate([
-                { transform: `translate(${startX}px, ${startY}px)` },
-                { transform: `translate(${endX}px, ${endY}px)` }
-            ], {
-                duration: 3000,
-                fill: 'forwards',
-                easing: 'linear'
-            });
+    modal.addEventListener("click", (event) => {
+        if (event.target === modal) {
+            modal.style.display = "none";
         }
+    });
+    function animateTruck(startX, startY, endX, endY) {
+        const truck = document.createElement('div');
+        truck.classList.add('truck');
+        truck.style.left = `${startX}px`;
+        truck.style.top = `${startY}px`;
+        container.appendChild(truck);
 
-        const boton = document.getElementById("animate-btn");
-   /* boton.addEventListener('click', () => { 
+        truck.animate([
+            { left: `${startX}px`, top: `${startY}px` },
+            { left: `${endX}px`, top: `${endY}px` }
+        ], {
+            duration: 3000,
+            fill: 'forwards',
+            easing: 'linear'
+        });
+    }
+
+    /*  document.querySelectorAll('.destino').forEach(destino => {
+          destino.addEventListener('click', () => {
+              const startX = almacenCentral.offsetLeft + almacenCentral.offsetWidth / 2;
+              const startY = almacenCentral.offsetTop + almacenCentral.offsetHeight / 2;
+              const endX = destino.offsetLeft + destino.offsetWidth / 2;
+              const endY = destino.offsetTop + destino.offsetHeight / 2;
+              animateTruck(startX, startY, endX, endY);
+          });
+      });*/
+
+    const boton = document.getElementById("animate-btn");
+    boton.addEventListener('click', () => {
         console.log("Button clicked");
-        const destino = document.querySelector('.destino[data-name="Destino 1"]');
+        const randomDestino = Math.floor(Math.random() * 4) + 1;
+        const destino = document.querySelector(`.destino[data-name="Destino ${randomDestino}"]`);
         const almacen = document.querySelector('.almacen-central');
         const startX = almacen.offsetLeft + almacen.offsetWidth / 2;
         const startY = almacen.offsetTop + almacen.offsetHeight / 2;
         const endX = destino.offsetLeft + destino.offsetWidth / 2;
         const endY = destino.offsetTop + destino.offsetHeight / 2;
         animateTruck(startX, startY, endX, endY);
-    });*/
-    
-        document.querySelectorAll('.destino').forEach(destino => {
-            destino.addEventListener('click', () => {
-                    console.log("Destino clicked");
+    });
 
-                const almacen = document.querySelector('.almacen-central');
-                const startX = almacen.offsetLeft + almacen.offsetWidth / 2;
-                const startY = almacen.offsetTop + almacen.offsetHeight / 2;
-                const endX = destino.offsetLeft + destino.offsetWidth / 2;
-                const endY = destino.offsetTop + destino.offsetHeight / 2;
-                animateTruck(startX, startY, endX, endY);
-            });
-        });
-
-     /*document.querySelectorAll('.almacen, .almacen-central, .destino').forEach(element => {
-         element.addEventListener("click", () => {
-             const name = element.getAttribute("data-name");
-             openModal(name);
-         });
-     });*/
-
-     closeModal.addEventListener("click", () => {
-         modal.style.display = "none";
-     });
-
-     modal.addEventListener("click", (event) => {
-         if (event.target === modal) {
-             modal.style.display = "none";
-         }
-     });
-
-    
- </script>
+    document.getElementById("open-modal-btn").addEventListener("click", function () {
+    fetch('/hacerpedido')
+        .then(response => response.text())
+        .then(data => {
+    document.getElementById("modal-container").innerHTML = data;
+    $("#modal_hacerpedido").modal("show"); // Open Bootstrap Modal
+    })
+        .catch(error => console.error("Error loading modal:", error));
+    });
+</script>
 </body>
 </html>
