@@ -30,6 +30,14 @@
                             <td th:text="${producto.categoria}"></td>
                             <td th:text="${producto.precio}"></td>
                             <td th:text="${producto.stock}"></td>
+                            <td class="text-center"><
+                                <form th:action="@{'/api/productos/' + ${producto.producto_id}}" method="delete">
+                                    <input type="hidden" name="_method" value="delete">
+                                    <button class="btn btn-outline-primary">
+                                        <img src="@{/images/delete-icon.png}" alt="Eliminar" width="20" height="20">
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
