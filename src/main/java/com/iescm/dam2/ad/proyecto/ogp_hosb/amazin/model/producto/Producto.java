@@ -1,11 +1,13 @@
 package com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.producto;
 
+import com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.almacen.Almacen;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.sql.Blob;
+import java.util.Set;
 
 @Entity
 @Table(name="productos")
@@ -32,6 +34,23 @@ public class Producto {
 
     @Lob
     private Blob imagen;
+
+    @ManyToMany
+    @JoinTable(
+            name = "producto_almacen",
+            joinColumns = @JoinColumn(name = "producto_id"),
+            inverseJoinColumns = @JoinColumn(name = "almacen_id")
+    )
+    private Set<Almacen> almacenes;
+
+
+    public Set<Almacen> getAlmacenes() {
+        return almacenes;
+    }
+
+    public void setAlmacenes(Set<Almacen> almacenes) {
+        this.almacenes = almacenes;
+    }
 
     public Long getProducto_id() {
         return producto_id;
@@ -75,4 +94,7 @@ public class Producto {
     public void setImagen(Blob imagen) {
         this.imagen = imagen;
     }
+
+
+
 }

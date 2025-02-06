@@ -4,7 +4,9 @@ CREATE TABLE almacenes(
     capacidad_max INT NOT NULL,
     ocupacion INT DEFAULT 0,
     direccion VARCHAR(255),
-	telefono VARCHAR(20)                               
+	telefono VARCHAR(20),
+	producto_id BIGINT, -- Foreign key here
+    FOREIGN KEY (producto_id) REFERENCES productos(producto_id)
 );
 
 
@@ -15,7 +17,9 @@ CREATE TABLE productos(
 	categoria varchar(50),
 	precio double NOT NULL,
 	stock int,
-	imagen blob
+	imagen blob,
+	almacen_id BIGINT,
+	FOREIGN KEY (almacen_id) REFERENCES almacenes(almacen_id)
 );
 
 CREATE TABLE destinos(
@@ -30,10 +34,8 @@ CREATE TABLE pedidos (
 	estado ENUM('ENVIADO', 'PLANIFICADO', 'FINALIZADO', 'CANCELADO') DEFAULT 'PLANIFICADO',
 	fecha_de_pedido DATE,
 	fecha_de_llegada DATE,
-    almacen_id BIGINT,
     producto_id BIGINT,
     destino_id BIGINT,
-    FOREIGN KEY (almacen_id) REFERENCES almacenes(almacen_id), 
     FOREIGN KEY (producto_id) REFERENCES productos(producto_id),
 	FOREIGN KEY (destino_id) REFERENCES destinos(destino_id)
 );
@@ -47,6 +49,14 @@ CREATE TABLE usuarios(
 );
 
 insert into  usuarios(nom_usuario,passw,email) values('admin','$2a$12$dLuG3q.fJty6l1gTYLZ2fe2FgsvdmXOQrN7iXfw/q5FwlIy5XRkyi','admin@quandaledingle.com'); 
+
+INSERT INTO almacenes (nombre, capacidad_max, ocupacion, direccion, telefono)
+VALUES
+    ('Almacén Central', 5000, 2500, 'Calle Principal 123, Ciudad A', '912345678'),
+    ('Almacén Norte', 3000, 1200, 'Avenida del Parque 45, Ciudad B', '913456789'),
+    ('Almacén Sur', 4000, 3000, 'Calle del Sol 67, Ciudad C', '914567890'),
+    ('Almacén Este', 2000, 800, 'Plaza Mayor 89, Ciudad D', '915678901'),
+    ('Almacén Oeste', 3500, 2000, 'Calle del Río 12, Ciudad E', '916789012');
 
 INSERT INTO destinos (nombre, distancia, direccion) 
 VALUES
