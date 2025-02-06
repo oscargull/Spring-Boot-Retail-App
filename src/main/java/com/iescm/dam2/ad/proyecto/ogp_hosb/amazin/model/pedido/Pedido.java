@@ -1,7 +1,6 @@
 package com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.pedido;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -98,7 +97,6 @@ public class Pedido {
     public void setDestino_id(Long destino_id) {
         this.destino_id = destino_id;
     }
-
 
     public enum Estado {
         ENVIADO,

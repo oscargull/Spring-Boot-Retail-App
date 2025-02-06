@@ -1,8 +1,6 @@
 package com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.pedido;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +15,6 @@ import com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.destino.Destino;
 import com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.destino.DestinoService;
 import com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.producto.Producto;
 import com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.producto.ProductoService;
-import com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.usuario.LoginRequest;
 
 @Controller
 public class HacerPedidoController {
