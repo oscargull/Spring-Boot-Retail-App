@@ -1,7 +1,5 @@
 package com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.destino;
 
-import com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.almacen.Almacen;
-import com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.almacen.AlmacenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
