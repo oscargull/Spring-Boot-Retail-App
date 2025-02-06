@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Pedidos</title>
+    <script>
+        let currentPedidoId = null;
+
+        function findPedido() {
+            const pedidoId = document.getElementById("pedidoId").value;
+            fetch(`/api/pedidos/${pedidoId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        currentPedidoId = data.pedido_id;
+                        document.getElementById("result").innerHTML = `
+                            <h3>Pedido Encontrado</h3>
+                            <p>ID: ${data.pedido_id}</p>
+                            <p>Estado: ${data.estado}</p>
+                            <p>Fecha de Pedido: ${data.fecha_de_pedido}</p>
+                            <p>Fecha de Llegada: ${data.fecha_de_llegada}</p>
+                            <p>Descripción: ${data.descripcion}</p>
+                            <p>Almacén ID: ${data.almacen_id}</p>
+                            <p>Producto ID: ${data.producto_id}</p>
+                            <p>Destino ID: ${data.destino_id}</p>
+                            <br>
+                            <button onclick="showUpdateForm()">Actualizar Pedido</button>
+                            <button onclick="deletePedido()">Eliminar Pedido</button>
+                        `;
+                    } else {
+                        document.getElementById("result").innerHTML = `<p>No se encontró un pedido con ID ${pedidoId}</p>`;
+                    }
+                })
+                .catch(error => {
+                    document.getElementById("result").innerHTML = `<p>Error al obtener los datos del pedido</p>`;
+                });
+        }
+
+        function deletePedido() {
+            if (currentPedidoId) {
+                fetch(`/api/pedidos/${currentPedidoId}`, { method: 'DELETE' })
+                    .then(response => {
+                        if (response.status === 204) {
+                            document.getElementById("result").innerHTML = `<p>Pedido con ID ${currentPedidoId} eliminado exitosamente.</p>`;
+                            currentPedidoId = null;
+                        } else {
+                            document.getElementById("result").innerHTML = `<p>Error al eliminar el pedido con ID ${currentPedidoId}</p>`;
+                        }
+                    });
+            }
+        }
+
+        function showUpdateForm() {
+            document.getElementById("result").innerHTML ='<form th:action="@{/hacerpedido}" th:object="${pedido}" method="post" class="mt-3"><div class="form-group"><label for="productoSelect">Producto a pedir</label><select id="productoSelect" name="producto" class="form-control" th:field="*{producto_id}"><option value="" disabled selected>Seleccione un producto</option><option th:each="producto : ${productos}" th:value="${producto.producto_id}" th:text="${producto.nombre}"></option></select></div><div class="form-group"><label for="estado">Estado del pedido</label><input type="text" id="estado" th:field="*{estado}" class="form-control" placeholder="Introduzca el estado del pedido"/></div><div class="form-group"><label for="fechaPedido">Fecha de pedido</label><input type="date" id="fechaPedido" th:field="*{fecha_de_pedido}" class="form-control" placeholder="Introduzca la fecha de pedido" required/></div><div class="form-group"><label for="fechaLlegada">Fecha estimada de llegada</label><input type="date" id="fechaLlegada" th:field="*{fecha_de_llegada}" class="form-control" placeholder="Introduzca la fecha de llegada" required/></div><div class="form-group"><label for="desc">Descripcion del pedido</label><input type="text" id="desc" th:field="*{descripcion}" class="form-control" placeholder="Introduzca la descripcion del pedido" required/></div><div class="form-group"><label for="almacenSelect">Almacen de origen</label><select id="almacenSelect" name="almacen" class="form-control" th:field="*{almacen_id}"><option value="" disabled selected>Seleccione un almacen</option><option th:each="almacen : ${almacenes}" th:value="${almacen.almacen_id}" th:text="${almacen.nombre}"></option></select></div><div class="form-group"><label for="destinoSelect">Destino</label><select id="destinoSelect" name="destino" class="form-control" th:field="*{destino_id}"><option value="" disabled selected>Seleccione un destino</option><option th:each="destino : ${destinos}" th:value="${destino.destino_id}" th:text="${destino.nombre}"></option></select></div><button type="submit" class="btn btn-primary btn-block">Pedir</button></form>';
+            }
+
+        function updatePedido(){
+            fecth('api/pedidos/${id}',{
+                method:'PUT',
+                Headers: {'Content-Type':'application/json'},
+                body: JSON.stringify(updatedPedido)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.pedidoId){
+                    document.getElementById("result").innerHTML=`
+                            <h3>Pedido Encontrado</h3>
+                            <p>ID: ${data.pedido_id}</p>
+                            <p>Estado: ${data.estado}</p>
+                            <p>Fecha de Pedido: ${data.fecha_de_pedido}</p>
+                            <p>Fecha de Llegada: ${data.fecha_de_llegada}</p>
+                            <p>Descripción: ${data.descripcion}</p>
+                            <p>Almacén ID: ${data.almacen_id}</p>
+                            <p>Producto ID: ${data.producto_id}</p>
+                            <p>Destino ID: ${data.destino_id}</p>
+                            <br>
+                            <button onclick="showUpdateForm()">Actualizar Pedido</button>
+                            <button onclick="deletePedido()">Eliminar Pedido</button>
+                        `;
+                }else{
+                    document.getElementById("result").innerHTML = `<p>Error updating pedido</p>`;
+                }
+            }).catch(error => {
+                    document.getElementById("result").innerHTML = `<p>Error updating pedido</p>`;
+                });
+        }
+    </script>
+</head>
+<body>
+    <h1>
+        Encuentra, Edita o Borra pedidos
+    </h1>
+    <form onsubmit="event.preventDefault(); findPedido();">
+        <label for="pedidoSelect">ID Pedido:</label>
+        <select id="pedidoSelect" name="pedido" class="form-control" th:field="*{pedido_id}">
+            <option value="" disabled selected>Seleccione un pedido</option>
+            <option th:each="pedido : ${pedidos}" th:value="${pedido.pedido_id}" th:text="${pedido.pedido_id}"></option>
+        </select>
+        <button type="submit">Encontrar pedido</button>
+    </form>
+</body>
