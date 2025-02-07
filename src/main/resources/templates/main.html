@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Almacenes and Destinos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="bootstrap/js/bootstrap-modal.js" rel="stylesheet" media="screen">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
@@ -120,26 +121,56 @@
     const container = document.querySelector('.container');
     const almacenCentral = document.querySelector('.almacen-central');
 
-    const destinos = [
-        { name: "Destino 1", distance: 30 },
-        { name: "Destino 2", distance: 50 },
-        { name: "Destino 3", distance: 70 },
-        { name: "Destino 4", distance: 90 }
-    ];
+    document.addEventListener("DOMContentLoaded", async function() {
+        const container = document.querySelector('.container');
 
-    destinos.forEach((destino, index) => {
-        const destinoElement = document.createElement('div');
-        destinoElement.classList.add('destino');
-        destinoElement.setAttribute('data-name', `Destino ${index + 1}`);
-        const angle = (destino.distance / 100) * 2 * Math.PI;
-        const maxRadius = Math.min(window.innerWidth, window.innerHeight) / 2;
-        const radius = (destino.distance / 100) * maxRadius;
-        const xPos = (window.innerWidth / 2) + radius * Math.cos(angle);
-        const yPos = (window.innerHeight / 2) + radius * Math.sin(angle);
-        destinoElement.style.left = `${xPos}px`;
-        destinoElement.style.top = `${yPos}px`;
-        container.appendChild(destinoElement);
+        try {
+            const response = await fetch('/api/destinos');
+            const destinos = await response.json();
+
+            destinos.forEach((destino, index) => {
+                const destinoElement = document.createElement('div');
+                destinoElement.classList.add('destino');
+                destinoElement.textContent = destino.nombre;
+                destinoElement.setAttribute('id', `destino ${index + 1}`);
+
+                const angle = (destino.distancia / 100) * 2 * Math.PI;
+                const maxRadius = Math.min(window.innerWidth, window.innerHeight) / 2;
+                const radius = (destino.distancia / 100) * maxRadius;
+                const xPos = (window.innerWidth / 2) + radius * Math.cos(angle);
+                const yPos = (window.innerHeight / 2) + radius * Math.sin(angle);
+
+                destinoElement.style.left = `${xPos}px`;
+                destinoElement.style.top = `${yPos}px`;
+
+                container.appendChild(destinoElement);
+            });
+
+        } catch (error) {
+            console.error("Error fetching destinos:", error);
+        }
     });
+
+//    const destinos = [
+//        { name: "Destino 1", distance: 30 },
+//        { name: "Destino 2", distance: 50 },
+//        { name: "Destino 3", distance: 70 },
+//        { name: "Destino 4", distance: 90 }
+//    ];
+//
+//    destinos.forEach((destino, index) => {
+//        const destinoElement = document.createElement('div');
+//        destinoElement.classList.add('destino');
+//        destinoElement.setAttribute('data-name', `Destino ${index + 1}`);
+//        const angle = (destino.distance / 100) * 2 * Math.PI;
+//        const maxRadius = Math.min(window.innerWidth, window.innerHeight) / 2;
+//        const radius = (destino.distance / 100) * maxRadius;
+//        const xPos = (window.innerWidth / 2) + radius * Math.cos(angle);
+//        const yPos = (window.innerHeight / 2) + radius * Math.sin(angle);
+//        destinoElement.style.left = `${xPos}px`;
+//        destinoElement.style.top = `${yPos}px`;
+//        container.appendChild(destinoElement);
+//    });
 
 
     const modal = document.getElementById("modal");
@@ -198,8 +229,8 @@
     const boton = document.getElementById("animate-btn");
     boton.addEventListener('click', () => {
         console.log("Button clicked");
-        const randomDestino = Math.floor(Math.random() * 4) + 1;
-        const destino = document.querySelector(`.destino[data-name="Destino ${randomDestino}"]`);
+        const randomDestino = Math.floor(Math.random() * 7) + 1;
+        const destino = document.querySelector(`.destino[id="destino ${randomDestino}"]`);
         const almacen = document.querySelector('.almacen-central');
         const startX = almacen.offsetLeft + almacen.offsetWidth / 2;
         const startY = almacen.offsetTop + almacen.offsetHeight / 2;
@@ -213,10 +244,19 @@
         .then(response => response.text())
         .then(data => {
     document.getElementById("modal-container").innerHTML = data;
-    $("#modal_hacerpedido").modal("show"); // Open Bootstrap Modal
+//   $("#modal_hacerpedido").modal("show"); // Open Bootstrap Modal
+        var myModal = new bootstrap.Modal(document.getElementById("modal_hacerpedido"));
+       // myModal.prependTo("body");
+        myModal.show();
+
+        $('.modal-backdrop').hide();
     })
         .catch(error => console.error("Error loading modal:", error));
     });
+    $(document).ready(function() {
+        $("#modal_hacerpedido").modal();
+    });
+
 </script>
 </body>
 </html>
