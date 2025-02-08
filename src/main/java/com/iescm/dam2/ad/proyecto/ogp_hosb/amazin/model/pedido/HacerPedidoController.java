@@ -15,6 +15,7 @@ import com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.destino.Destino;
 import com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.destino.DestinoService;
 import com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.producto.Producto;
 import com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.producto.ProductoService;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HacerPedidoController {
@@ -47,8 +48,10 @@ public class HacerPedidoController {
     }
 
     @PostMapping("/hacerpedido")
-    public Pedido hacerPedido(@ModelAttribute Pedido pedido, Model model) {
-       return pedidoService.crearPedido(pedido);
+    public String hacerPedido(@ModelAttribute Pedido pedido, Model model) {
+        pedidoService.crearPedido(pedido);
+        return "main"; // Replace with the actual Thymeleaf template name
     }
+
 
 }

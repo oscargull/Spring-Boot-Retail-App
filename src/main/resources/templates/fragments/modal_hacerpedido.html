@@ -4,69 +4,66 @@
      aria-hidden="true" th:fragment="modal">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header bg-primary text-white">
                 <h5 class="modal-title" id="modal_hacerpedidoLabel">Hacer un Pedido</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form th:action="@{/hacerpedido}" th:object="${pedido}" method="post">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="productoSelect">Producto a pedir</label>
-                                <select id="productoSelect" name="producto" class="form-control" th:field="*{producto_id}">
-                                    <option value="" disabled selected>Seleccione un producto</option>
-                                    <option th:each="producto : ${productos}" th:value="${producto.producto_id}" th:text="${producto.nombre}"></option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="estado">Estado del pedido</label>
-                                <input type="text" id="estado" th:field="*{estado}" class="form-control" placeholder="Introduzca el estado del pedido">
-                            </div>
-                        </div>
+                <form id="pedidoForm" th:action="@{/hacerpedido}" th:object="${pedido}" method="post">
+                    <!-- Producto a pedir -->
+                    <div class="form-group mb-4">
+                        <label for="productoSelect">Producto a pedir</label>
+                        <select id="productoSelect" name="producto" class="form-control" th:field="*{producto_id}">
+                            <option value="" disabled selected>Seleccione un producto</option>
+                            <option th:each="producto : ${productos}" th:value="${producto.producto_id}" th:text="${producto.nombre}"></option>
+                        </select>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="fechaPedido">Fecha de pedido</label>
-                                <input type="date" id="fechaPedido" th:field="*{fecha_de_pedido}" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="fechaLlegada">Fecha estimada de llegada</label>
-                                <input type="date" id="fechaLlegada" th:field="*{fecha_de_llegada}" class="form-control" required>
-                            </div>
-                        </div>
+
+                    <!-- Estado del pedido -->
+                    <div class="form-group mb-4">
+                        <label for="estado">Estado del pedido</label>
+                        <input type="text" id="estado" th:field="*{estado}" class="form-control" placeholder="Introduzca el estado del pedido">
                     </div>
-                    <div class="form-group">
+
+                    <!-- Fecha de pedido -->
+                    <div class="form-group mb-4">
+                        <label for="fechaPedido">Fecha de pedido</label>
+                        <input type="date" id="fechaPedido" th:field="*{fecha_de_pedido}" class="form-control" required>
+                    </div>
+
+                    <!-- Fecha estimada de llegada -->
+                    <div class="form-group mb-4">
+                        <label for="fechaLlegada">Fecha estimada de llegada</label>
+                        <input type="date" id="fechaLlegada" th:field="*{fecha_de_llegada}" class="form-control" required>
+                    </div>
+
+                    <!-- Descripción del pedido -->
+                    <div class="form-group mb-4">
                         <label for="desc">Descripcion del pedido</label>
                         <textarea id="desc" th:field="*{descripcion}" class="form-control" placeholder="Introduzca la descripcion del pedido" rows="3" required></textarea>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="almacenSelect">Almacen de origen</label>
-                                <select id="almacenSelect" name="almacen" class="form-control" th:field="*{almacen_id}">
-                                    <option value="" disabled selected>Seleccione un almacen</option>
-                                    <option th:each="almacen : ${almacenes}" th:value="${almacen.almacen_id}" th:text="${almacen.nombre}"></option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="destinoSelect">Destino</label>
-                                <select id="destinoSelect" name="destino" class="form-control" th:field="*{destino_id}">
-                                    <option value="" disabled selected>Seleccione un destino</option>
-                                    <option th:each="destino : ${destinos}" th:value="${destino.destino_id}" th:text="${destino.nombre}"></option>
-                                </select>
-                            </div>
-                        </div>
+
+                    <!-- Almacen de origen -->
+                    <div class="form-group mb-4">
+                        <label for="almacenSelect">Almacen de origen</label>
+                        <select id="almacenSelect" name="almacen" class="form-control" th:field="*{almacen_id}">
+                            <option value="" disabled selected>Seleccione un almacen</option>
+                            <option th:each="almacen : ${almacenes}" th:value="${almacen.almacen_id}" th:text="${almacen.nombre}"></option>
+                        </select>
                     </div>
+
+                    <!-- Destino -->
+                    <div class="form-group mb-4">
+                        <label for="destinoSelect">Destino</label>
+                        <select id="destinoSelect" name="destino" class="form-control" th:field="*{destino_id}">
+                            <option value="" disabled selected>Seleccione un destino</option>
+                            <option th:each="destino : ${destinos}" th:value="${destino.destino_id}" th:text="${destino.nombre}"></option>
+                        </select>
+                    </div>
+
+                    <!-- Submit -->
                     <button type="submit" class="btn btn-primary btn-block">Pedir</button>
                 </form>
             </div>

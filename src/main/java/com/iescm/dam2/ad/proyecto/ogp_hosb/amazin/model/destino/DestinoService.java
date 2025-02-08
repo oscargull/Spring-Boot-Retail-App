@@ -1,6 +1,7 @@
 package com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.destino;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,11 @@ public class DestinoService implements DestinoServiceInterface{
     @Override
     public List<Destino> listarDestinos() {
         return repository.findAll();
+    }
+
+    @Override
+    public Optional<Destino> obtenerPorId(Long id) {
+        return repository.findById(id);
     }
 
 }
