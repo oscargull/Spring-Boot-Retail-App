@@ -4,15 +4,10 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/pedidos")
@@ -20,6 +15,10 @@ public class PedidoController {
 
     @Autowired
     private PedidoRepository pedidoRepository;
+
+    @Autowired
+    private PedidoService pedidoService;
+
 
     // Obtener pedido por ID
     @GetMapping("/{id}")
@@ -56,6 +55,15 @@ public class PedidoController {
                     return ResponseEntity.ok(pedido);
                 })
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
+
+    @RequestMapping(value="/hacerpedido", method=RequestMethod.POST)
+    public @ResponseBody Pedido hacerPedido(@ModelAttribute("pedido") Pedido pedido, Model model)
+    {
+        pedidoService.crearPedido(pedido);
+        model.addAttribute("pedido", pedido);
+        return pedido;
     }
 
 }

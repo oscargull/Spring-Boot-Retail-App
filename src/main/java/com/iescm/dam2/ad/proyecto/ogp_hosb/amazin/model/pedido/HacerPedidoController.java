@@ -3,11 +3,12 @@ package com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.pedido;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.almacen.Almacen;
 import com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.almacen.AlmacenService;
@@ -15,7 +16,6 @@ import com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.destino.Destino;
 import com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.destino.DestinoService;
 import com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.producto.Producto;
 import com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.producto.ProductoService;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HacerPedidoController {
@@ -45,12 +45,6 @@ public class HacerPedidoController {
         model.addAttribute("productos", productos);
         model.addAttribute("destinos", destinos);
         return "fragments/modal_hacerpedido";
-    }
-
-    @PostMapping("/hacerpedido")
-    public String hacerPedido(@ModelAttribute Pedido pedido, Model model) {
-        pedidoService.crearPedido(pedido);
-        return "main"; // Replace with the actual Thymeleaf template name
     }
 
 

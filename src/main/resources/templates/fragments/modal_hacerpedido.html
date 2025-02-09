@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <div class="modal fade" id="modal_hacerpedido" tabindex="-1" role="dialog" aria-labelledby="modal_hacerpedidoLabel"
      aria-hidden="true" th:fragment="modal">
     <div class="modal-dialog modal-lg" role="document">
@@ -11,7 +12,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="pedidoForm" th:action="@{/hacerpedido}" th:object="${pedido}" method="post">
+                <form id="pedidoForm" action="#"  th:action="@{/hacerpedido}" th:object="${pedido}" method="post">
                     <!-- Producto a pedir -->
                     <div class="form-group mb-4">
                         <label for="productoSelect">Producto a pedir</label>
@@ -64,10 +65,13 @@
                     </div>
 
                     <!-- Submit -->
-                    <button type="submit" class="btn btn-primary btn-block">Pedir</button>
+                    <input type="button" value="Save Changes" id="post" onClick="sendData()" />
                 </form>
             </div>
         </div>
     </div>
 </div>
+<script>
+
+</script>
 </html>
