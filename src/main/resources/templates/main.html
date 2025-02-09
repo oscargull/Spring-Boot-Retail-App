@@ -87,9 +87,14 @@
 </head>
 <body>
 <div class="text-center">
-    <button id="open-modal-btn" class="btn btn-danger btn-lg w-50">
-        Hacer Pedido
-    </button>
+    <form th:action="@{/hacerpedido}" th:object="${hacerpedido}" method="get" class="mt-3">
+        <button id="open-modal-btn" class="btn btn-danger btn-lg w-50">Hacer Pedido</button>
+    </form>
+</div>
+<div class="text-center">
+    <form th:action="@{/search}" th:object="${search}" method="get" class="mt-3">
+        <button id="open-modal-btn" class="btn btn-danger btn-lg w-50">Buscar Pedido</button>
+    </form>
 </div>
 <div class="row mb-4">
     <div class="col-12 text-center">
