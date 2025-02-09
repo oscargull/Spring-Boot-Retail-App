@@ -21,4 +21,6 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long>{
     List<Pedido> buscarPorDestino(@Param("destino_id") Long destino_id);
 
     //cambiar destino
+
+    List<Pedido> findByPedidoId(Long pedidoId);
 }
