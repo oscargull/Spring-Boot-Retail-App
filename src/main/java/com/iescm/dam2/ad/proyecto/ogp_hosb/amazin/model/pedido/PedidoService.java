@@ -63,4 +63,26 @@ public class PedidoService implements PedidoServiceInterface{
         return repository.findById(id);
     }
 
+        public List<Pedido> searchPedidosById(Long pedidoId) {
+        if (pedidoId != null) {
+            return pedidoRepository.findByPedidoId(pedidoId);
+        } else {
+            return new ArrayList<>();  // Return an empty list if no pedido_id is provided
+        }
+    }
+
+    // Find Pedido by ID
+    public Pedido findPedidoById(Long pedidoId) {
+        return pedidoRepository.findById(pedidoId).orElse(null);
+    }
+
+    // Save or update Pedido
+    public void save(Pedido pedido) {
+        pedidoRepository.save(pedido);
+    }
+
+    // Delete Pedido by ID
+    public void delete(Long id) {
+        pedidoRepository.deleteById(id);
+    }
 }
