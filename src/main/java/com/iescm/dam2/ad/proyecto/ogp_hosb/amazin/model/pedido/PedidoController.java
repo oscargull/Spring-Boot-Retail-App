@@ -21,40 +21,34 @@ public class PedidoController {
 
 
     // Obtener pedido por ID
-    @GetMapping("/{id}")
-    public ResponseEntity<Pedido> getPedidoById(@PathVariable Long id) {
-        Optional<Pedido> pedido = pedidoRepository.findById(id);
-        return pedido.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    @GetMapping("/search")
+    public Pedido searchPedidoById(@RequestParam Long pedido_id) {
+        Optional<Pedido> pedido = pedidoRepository.findById(pedido_id);
+        return pedido.orElse(null);  // Return the Pedido if found, or null if not found
     }
 
-    // Eliminar pedido por ID
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePedido(@PathVariable Long id) {
-        if (pedidoRepository.existsById(id)) {
-            pedidoRepository.deleteById(id);
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    // Endpoint to edit a pedido
+    @PutMapping("/{pedido_id}")
+    public Pedido updatePedido(@PathVariable Long pedido_id, @RequestBody Pedido pedidoDetails) {
+        Optional<Pedido> optionalPedido = pedidoService.obtenerPorId(pedido_id);
+        if (optionalPedido.isPresent()) {
+            Pedido pedido = optionalPedido.get();
+            pedido.setEstado(pedidoDetails.getEstado());
+            pedido.setDescripcion(pedidoDetails.getDescripcion());
+            pedido.setDestino_id(pedidoDetails.getDestino_id());
+            pedido.setFecha_de_llegada(pedidoDetails.getFecha_de_llegada());
+            pedido.setFecha_de_pedido(pedidoDetails.getFecha_de_pedido());
+            pedido.setAlmacen_id(pedidoDetails.getAlmacen_id());
+            pedido.setProducto_id(pedidoDetails.getProducto_id());
+            return pedidoRepository.save(pedido);
         }
+        return null;
     }
 
-    // Actualizar pedido por ID
-    @PutMapping("/{id}")
-    @PostMapping("/buscarpedido")
-    public ResponseEntity<Pedido> updatePedido(@PathVariable Long id, @RequestBody Pedido updatedPedido) {
-        return pedidoRepository.findById(id)
-                .map(pedido -> {
-                    pedido.setEstado(updatedPedido.getEstado());
-                    pedido.setFecha_de_pedido(updatedPedido.getFecha_de_pedido());
-                    pedido.setFecha_de_llegada(updatedPedido.getFecha_de_llegada());
-                    pedido.setDescripcion(updatedPedido.getDescripcion());
-                    pedido.setAlmacen_id(updatedPedido.getAlmacen_id());
-                    pedido.setProducto_id(updatedPedido.getProducto_id());
-                    pedido.setDestino_id(updatedPedido.getDestino_id());
-                    pedidoRepository.save(pedido);
-                    return ResponseEntity.ok(pedido);
-                })
-                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    // Endpoint to delete a pedido
+    @DeleteMapping("/{pedido_id}")
+    public void deletePedido(@PathVariable Long pedido_id) {
+        pedidoService.eliminarPedido(pedido_id);
     }
 
 
