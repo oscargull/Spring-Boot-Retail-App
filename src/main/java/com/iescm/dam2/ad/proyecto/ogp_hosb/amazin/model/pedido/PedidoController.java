@@ -22,33 +22,60 @@ public class PedidoController {
 
     // Obtener pedido por ID
     @GetMapping("/search")
-    public Pedido searchPedidoById(@RequestParam Long pedido_id) {
-        Optional<Pedido> pedido = pedidoRepository.findById(pedido_id);
-        return pedido.orElse(null);  // Return the Pedido if found, or null if not found
+    public String searchPedidos(
+            @RequestParam(required = false) Long pedidoId,
+            Model model) {
+
+        List<Pedido> pedidos = pedidoService.searchPedidosById(pedidoId);
+        model.addAttribute("pedidos", pedidos);
+        model.addAttribute("pedidoId", pedidoId);
+        return "search_pedido";
     }
 
-    // Endpoint to edit a pedido
-    @PutMapping("/{pedido_id}")
-    public Pedido updatePedido(@PathVariable Long pedido_id, @RequestBody Pedido pedidoDetails) {
-        Optional<Pedido> optionalPedido = pedidoService.obtenerPorId(pedido_id);
-        if (optionalPedido.isPresent()) {
-            Pedido pedido = optionalPedido.get();
-            pedido.setEstado(pedidoDetails.getEstado());
-            pedido.setDescripcion(pedidoDetails.getDescripcion());
-            pedido.setDestino_id(pedidoDetails.getDestino_id());
-            pedido.setFecha_de_llegada(pedidoDetails.getFecha_de_llegada());
-            pedido.setFecha_de_pedido(pedidoDetails.getFecha_de_pedido());
-            pedido.setAlmacen_id(pedidoDetails.getAlmacen_id());
-            pedido.setProducto_id(pedidoDetails.getProducto_id());
-            return pedidoRepository.save(pedido);
+    // Edit Pedido
+    @GetMapping("/pedido/edit/{id}")
+    public String editPedido(@PathVariable Long id, Model model) {
+        Pedido pedido = pedidoService.findPedidoById(id);
+        if (pedido != null) {
+            model.addAttribute("pedido", pedido);
+            return "edit_pedido";
+        } else {
+            model.addAttribute("message", "Pedido not found.");
+            return "search_pedido";
         }
-        return null;
     }
 
-    // Endpoint to delete a pedido
-    @DeleteMapping("/{pedido_id}")
-    public void deletePedido(@PathVariable Long pedido_id) {
-        pedidoService.eliminarPedido(pedido_id);
+    // Update Pedido
+    @PostMapping("/pedido/edit/{id}")
+    public String updatePedido(@PathVariable Long id, @ModelAttribute Pedido updatedPedido, Model model) {
+        Pedido pedido = pedidoService.findPedidoById(id);
+        if (pedido != null) {
+            pedido.setEstado(updatedPedido.getEstado());
+            pedido.setFecha_de_pedido(updatedPedido.getFecha_de_pedido());
+            pedido.setFecha_de_llegada(updatedPedido.getFecha_de_llegada());
+            pedido.setDescripcion(updatedPedido.getDescripcion());
+            pedido.setAlmacen_id(updatedPedido.getAlmacen_id());
+            pedido.setProducto_id(updatedPedido.getProducto_id());
+            pedido.setDestino_id(updatedPedido.getDestino_id());
+            pedidoService.save(pedido);  // Save the updated Pedido to the database
+            model.addAttribute("message", "Pedido updated successfully!");
+        } else {
+            model.addAttribute("message", "Pedido not found.");
+        }
+        return "search_pedido";
+    }
+
+    // Delete Pedido
+    @GetMapping("/pedido/delete/{id}")
+    public String deletePedido(@PathVariable Long id, Model model) {
+        Pedido pedido = pedidoService.findPedidoById(id);
+        if (pedido != null) {
+            pedidoService.delete(id);  // Delete the Pedido by its ID
+            model.addAttribute("message", "Pedido deleted successfully.");
+        } else {
+            model.addAttribute("message", "Pedido not found.");
+        }
+        return "search_pedido";
     }
 
 
