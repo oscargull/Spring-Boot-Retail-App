@@ -22,5 +22,5 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long>{
 
     //cambiar destino
 
-    List<Pedido> findByPedidoId(Long pedidoId);
+//    List<Pedido> findByPedidoId(Long pedido_id);
 }

@@ -1,5 +1,6 @@
 package com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.pedido;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +23,11 @@ public class PedidoController {
 
     // Obtener pedido por ID
     @GetMapping("/search")
-    public String searchPedidos(
+    public String searchPedido(
             @RequestParam(required = false) Long pedidoId,
             Model model) {
-
-        List<Pedido> pedidos = pedidoService.searchPedidosById(pedidoId);
-        model.addAttribute("pedidos", pedidos);
+        Pedido pedido = pedidoService.searchPedidosById(pedidoId);
+        model.addAttribute("pedido", pedido);
         model.addAttribute("pedidoId", pedidoId);
         return "search_pedido";
     }

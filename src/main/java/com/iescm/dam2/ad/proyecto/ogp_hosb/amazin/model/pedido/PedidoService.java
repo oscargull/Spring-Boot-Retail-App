@@ -1,5 +1,6 @@
 package com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.pedido;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,26 +64,28 @@ public class PedidoService implements PedidoServiceInterface{
         return repository.findById(id);
     }
 
-        public List<Pedido> searchPedidosById(Long pedidoId) {
+        public Pedido searchPedidosById(Long pedidoId) {
+        Pedido ped;
         if (pedidoId != null) {
-            return pedidoRepository.findByPedidoId(pedidoId);
+            ped = repository.findById(pedidoId).orElse(null);
         } else {
-            return new ArrayList<>();  // Return an empty list if no pedido_id is provided
+             ped = null;
         }
-    }
+            return ped;
+        }
 
     // Find Pedido by ID
-    public Pedido findPedidoById(Long pedidoId) {
-        return pedidoRepository.findById(pedidoId).orElse(null);
+    public Pedido findPedidoById(Long pedido_id) {
+        return repository.findById(pedido_id).orElse(null);
     }
 
     // Save or update Pedido
     public void save(Pedido pedido) {
-        pedidoRepository.save(pedido);
+        repository.save(pedido);
     }
 
     // Delete Pedido by ID
     public void delete(Long id) {
-        pedidoRepository.deleteById(id);
+        repository.deleteById(id);
     }
 }
