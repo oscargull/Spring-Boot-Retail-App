@@ -1,126 +1,63 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Pedidos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <title>Search Pedidos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+    <div class="container mt-5">
+        <h2>Search Pedidos</h2>
+        
+        <!-- Search Form -->
+        <form action="/search" method="get" class="mb-4">
+            <div class="row">
+                <div class="col-md-3">
+                    <input type="number" name="pedidoId" class="form-control" placeholder="Pedido ID" value="${pedidoId}">
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </form>
 
-<div class="container mt-5">
-    <h2>Search for Pedido by Pedido ID</h2>
-    <form id="searchForm">
-        <div class="row mb-3">
-            <div class="col">
-                <input type="number" id="pedidoIdInput" class="form-control" placeholder="Enter Pedido ID" />
-            </div>
-            <div class="col">
-                <button type="submit" class="btn btn-primary">Search</button>
-            </div>
+        <!-- Search Results -->
+        <div th:if="${pedidos != null}">
+            <h3>Search Results</h3>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Pedido ID</th>
+                        <th>Estado</th>
+                        <th>Fecha de Pedido</th>
+                        <th>Fecha de Llegada</th>
+                        <th>Descripción</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="pedido : ${pedidos}">
+                        <td th:text="${pedido.pedido_id}"></td>
+                        <td th:text="${pedido.estado}"></td>
+                        <td th:text="${pedido.fecha_de_pedido}"></td>
+                        <td th:text="${pedido.fecha_de_llegada}"></td>
+                        <td th:text="${pedido.descripcion}"></td>
+                        <td>
+                            <!-- Edit and Delete buttons -->
+                            <a th:href="@{/pedido/edit/{id}(id=${pedido.pedido_id})}" class="btn btn-warning btn-sm">Edit</a>
+                            <a th:href="@{/pedido/delete/{id}(id=${pedido.pedido_id})}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this pedido?')">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-    </form>
 
-    <div id="results" class="mt-4">
-        <h4>Search Result</h4>
-        <table class="table table-striped" id="resultTable" style="display:none;">
-            <thead>
-                <tr>
-                    <th>Pedido ID</th>
-                    <th>Estado</th>
-                    <th>Fecha de Pedido</th>
-                    <th>Fecha de Llegada</th>
-                    <th>Descripcion</th>
-                    <th>Destino ID</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="resultBody">
-                <!-- Result will be populated here via JavaScript -->
-            </tbody>
-        </table>
-        <p id="noResultsMessage" style="display:none;">No Pedido found with this ID.</p>
+        <div th:if="${pedidos == null or pedidos.isEmpty()}">
+            <p class="text-danger">No results found for the given search criteria.</p>
+        </div>
     </div>
-</div>
 
-<!-- Bootstrap and jQuery CDN -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
-<script>
-    $(document).ready(function() {
-        // Handle form submission
-        $("#searchForm").submit(function(e) {
-            e.preventDefault();
-            
-            const pedido_id = $("#pedidoIdInput").val();
-            
-            // Clear previous search results
-            $('#resultBody').empty();
-            $('#noResultsMessage').hide();
-            $('#resultTable').hide();
-
-            if (pedido_id) {
-                // AJAX call to Spring Boot backend
-                $.ajax({
-                    url: `/api/pedidos/search`,
-                    method: 'GET',
-                    data: { pedido_id: pedido_id },
-                    success: function(data) {
-                        if (data) {
-                            // Populate the results table with the found Pedido
-                            $('#resultTable').show();
-                            $('#resultBody').append(`
-                                <tr id="pedido-${data.pedido_id}">
-                                    <td>${data.pedido_id}</td>
-                                    <td>${data.estado}</td>
-                                    <td>${data.fecha_de_pedido}</td>
-                                    <td>${data.fecha_de_llegada}</td>
-                                    <td>${data.descripcion}</td>
-                                    <td>${data.destino_id}</td>
-                                    <td>
-                                        <button class="btn btn-warning btn-sm" onclick="editPedido(${data.pedido_id})">Edit</button>
-                                        <button class="btn btn-danger btn-sm" onclick="deletePedido(${data.pedido_id})">Delete</button>
-                                    </td>
-                                </tr>
-                            `);
-                        } else {
-                            $('#noResultsMessage').show();
-                        }
-                    },
-                    error: function(err) {
-                        alert('Error fetching result');
-                    }
-                });
-            }
-        });
-    });
-
-    // Function to handle the Edit button click
-    function editPedido(pedidoId) {
-        // Open a modal or redirect to an edit page
-        alert(`Edit Pedido ID: ${pedidoId}`);
-        // You would open a modal or redirect to the page where you can edit the Pedido details
-    }
-
-    // Function to handle the Delete button click
-    function deletePedido(pedidoId) {
-        if (confirm("Are you sure you want to delete this Pedido?")) {
-            $.ajax({
-                url: `/api/pedidos/${pedidoId}`,
-                method: 'DELETE',
-                success: function() {
-                    alert('Pedido deleted successfully');
-                    // Optionally, remove the row from the table
-                    $(`#pedido-${pedidoId}`).remove();
-                },
-                error: function(err) {
-                    alert('Error deleting Pedido');
-                }
-            });
-        }
-    }
-</script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
