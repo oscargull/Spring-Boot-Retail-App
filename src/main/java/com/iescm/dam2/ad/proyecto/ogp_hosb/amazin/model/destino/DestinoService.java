@@ -23,4 +23,11 @@ public class DestinoService implements DestinoServiceInterface{
         return repository.findById(id);
     }
 
+    @Override
+    public void eliminarDestino(Long id) {
+        repository.deleteById(id);
+    }
+
+    
+
 }

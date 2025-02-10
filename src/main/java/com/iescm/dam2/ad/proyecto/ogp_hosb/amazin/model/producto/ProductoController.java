@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,11 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 
-@RestController
+@Controller
 @RequestMapping("/api/productos")
 public class ProductoController{
 
@@ -60,10 +63,14 @@ public class ProductoController{
         return service.listarPorPrecioMayorQue(precio);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarProducto(@PathVariable Long id){
+    @PostMapping("/{id}/delete")
+    public String eliminarProducto(@PathVariable Long id, Model model){
         service.eliminarProducto(id);
-        return ResponseEntity.noContent().build();
+        List<Producto> productos = service.listarProductos();
+        model.addAttribute("productos", productos);
+        return "listado_productos";
     }
+
+   
 
 }

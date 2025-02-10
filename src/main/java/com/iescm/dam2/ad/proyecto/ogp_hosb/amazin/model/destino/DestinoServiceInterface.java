@@ -11,5 +11,7 @@ public interface DestinoServiceInterface {
     public List<Destino> listarDestinos();
 
     public Optional<Destino> obtenerPorId(Long id);
+
+    public void eliminarDestino(Long id);
     
 }

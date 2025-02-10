@@ -7,8 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.producto.Producto;
 
 import java.util.List;
 
@@ -39,5 +42,14 @@ public class DestinoController {
         model.addAttribute("destino", destino);
         return "fragments/modal_destino"; // Return the Thymeleaf template name
     }
+
+    @PostMapping("/{id}/delete")
+    public String eliminarDestino(@PathVariable Long id, Model model){
+        destinoService.eliminarDestino(id);
+        List<Destino> destinos = destinoService.listarDestinos();
+        model.addAttribute("destinos", destinos);
+        return "listado_destinos";
+    }
+
 
 }

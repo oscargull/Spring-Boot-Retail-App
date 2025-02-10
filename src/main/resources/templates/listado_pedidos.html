@@ -34,7 +34,14 @@
                             <td th:text="${pedido.almacen_id}"></td>
                             <td th:text="${pedido.producto_id}"></td>
                             <td th:text="${pedido.destino_id}"></td>
-
+                            <td class="text-center">
+                                <form th:action="@{'/api/pedidos/' + ${pedido.pedido_id}} + '/delete'" method="post">
+                                    <input type="hidden" name="_method" value="delete">
+                                    <button class="btn btn-outline-primary">
+                                        <img th:src="@{delete-icon.png}" alt="Eliminar" width="20" height="20">
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

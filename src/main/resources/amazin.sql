@@ -35,8 +35,8 @@ CREATE TABLE pedidos (
 	fecha_de_llegada DATE,
     producto_id BIGINT,
     destino_id BIGINT,
-    FOREIGN KEY (producto_id) REFERENCES productos(producto_id),
-	FOREIGN KEY (destino_id) REFERENCES destinos(destino_id)
+    FOREIGN KEY (producto_id) REFERENCES productos(producto_id) ON DELETE CASCADE,
+	FOREIGN KEY (destino_id) REFERENCES destinos(destino_id) ON DELETE CASCADE
 );
 
 CREATE TABLE usuarios(

@@ -30,6 +30,14 @@
                             <td th:text="${almacen.ocupacion}"></td>
                             <td th:text="${almacen.direccion}"></td>
                             <td th:text="${almacen.telefono}"></td>
+                            <td class="text-center">
+                                <form th:action="@{'/api/almacenes/' + ${almacen.almacen_id}} + '/delete'" method="post">
+                                    <input type="hidden" name="_method" value="delete">
+                                    <button class="btn btn-outline-primary">
+                                        <img th:src="@{delete-icon.png}" alt="Eliminar" width="20" height="20">
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

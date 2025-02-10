@@ -24,7 +24,16 @@
                 <td th:text="${destino.destino_id}"></td>
                 <td th:text="${destino.nombre}"></td>
                 <td th:text="${destino.distancia}"></td>
-                <td th:text="${destino.direccion}"></td></tr>
+                <td th:text="${destino.direccion}"></td>
+                <td class="text-center">
+                    <form th:action="@{'/api/destinos/' + ${destino.destino_id}} + '/delete'" method="post">
+                        <input type="hidden" name="_method" value="delete">
+                        <button class="btn btn-outline-primary">
+                            <img th:src="@{delete-icon.png}" alt="Eliminar" width="20" height="20">
+                        </button>
+                    </form>
+                </td>
+            </tr>
             </tbody>
         </table>
         <div th:if="${#lists.isEmpty(destinos)}">

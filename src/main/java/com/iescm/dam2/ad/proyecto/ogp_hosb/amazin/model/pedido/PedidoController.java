@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.producto.Producto;
+
 @RestController
 @RequestMapping("/api/pedidos")
 public class PedidoController {
@@ -85,6 +87,14 @@ public class PedidoController {
         pedidoService.crearPedido(pedido);
         model.addAttribute("pedido", pedido);
         return pedido;
+    }
+
+    @PostMapping("/{id}/delete")
+    public String eliminarPedido(@PathVariable Long id, Model model){
+        pedidoService.eliminarPedido(id);
+        List<Pedido> pedidos = pedidoService.listarPedidoss();
+        model.addAttribute("pedidos", pedidos);
+        return "listado_pedidos";
     }
 
 }

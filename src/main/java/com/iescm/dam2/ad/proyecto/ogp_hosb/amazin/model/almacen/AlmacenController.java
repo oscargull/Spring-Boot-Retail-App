@@ -1,6 +1,8 @@
 package com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.almacen;
 
 import com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.destino.Destino;
+import com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.producto.Producto;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -35,4 +38,14 @@ public class AlmacenController {
         model.addAttribute("almacen", almacen);
         return "fragments/modal_almacen";
     }
+
+    /*@PostMapping("/{id}/delete")
+    public String eliminarAlmacen(@PathVariable Long id, Model model){
+        almacenService.eliminarAlmacen(id);
+        List<Almacen> almacenes = almacenService.listarAlmacenes();
+        model.addAttribute("almacenes", almacenes);
+        return "listado_almacenes";
+    }*/
+
+
 }

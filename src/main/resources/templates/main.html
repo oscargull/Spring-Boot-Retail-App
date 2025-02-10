@@ -19,6 +19,7 @@
            
         }
 
+        
         .container {
             position: absolute;
             top: 0;
@@ -30,6 +31,14 @@
             border: 1px solid red;
       /*      background-image: url('@{/static/plano.png}');*/
         }
+        .container {
+    max-width: 100% !important;
+}
+            @media (min-width: 1400px) {
+        .container {
+            max-width: 100% !important; 
+        }
+    }
 
         .almacen-central, .almacen, .destino {
             position: absolute;
@@ -104,7 +113,7 @@
         <a href="/pedidos" class="btn btn-warning">📜 Pedidos</a>
     </div>
 </nav>
-<div class="container" th:style="'background-image: url(' + @{/plano.png} + '); background-repeat: no-repeat; background-size: cover;'">
+<div class="container" th:style="'background-image: url(' + @{/plano.jpg} + '); background-repeat: no-repeat; background-size: cover;'">
     <div class="almacen almacen-central" id="1" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">
         <img th:src="@{warehouse.png}">
     </div>
