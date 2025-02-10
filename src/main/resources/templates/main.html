@@ -16,16 +16,19 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
+           
         }
 
         .container {
             position: absolute;
             top: 0;
             left: 0;
+            right: 0;
             width: 100%;
             height: 100%;
             overflow: hidden;
             border: 1px solid red;
+      /*      background-image: url('@{/static/plano.png}');*/
         }
 
         .almacen-central, .almacen, .destino {
@@ -64,7 +67,7 @@
         #open-modal-btn {
             position: absolute;
             top: calc(50% + 120px);
-            left: 50%;
+            left: 57%;
             transform: translateX(-50%);
             z-index: 1000;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
@@ -101,7 +104,7 @@
         <a href="/pedidos" class="btn btn-warning">📜 Pedidos</a>
     </div>
 </nav>
-<div class="container">
+<div class="container" th:style="'background-image: url(' + @{/plano.png} + '); background-repeat: no-repeat; background-size: cover;'">
     <div class="almacen almacen-central" id="1" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">
         <img th:src="@{warehouse.png}">
     </div>
@@ -119,9 +122,9 @@
 
 <script>
 
+ 
 
-
-     const container = document.querySelector('.container');
+    const container = document.querySelector('.container');
 
     document.addEventListener("DOMContentLoaded", async function() {
         const container = document.querySelector('.container');
@@ -155,11 +158,26 @@
                 container.appendChild(destinoElement);
             });
 
+            //testear animación
+            const boton = document.getElementById("animate-btn");
+
+                boton.addEventListener('click', () => {            
+                const randomIndex = Math.floor(Math.random() * destinos.length);
+                const destinoId = destinos[randomIndex].destino_id; 
+                const destino = document.querySelector(`.destino[id="${destinoId}"]`);
+                const almacen = document.querySelector('.almacen-central');
+                const startX = almacen.offsetLeft + almacen.offsetWidth / 2;
+                const startY = almacen.offsetTop + almacen.offsetHeight / 2;
+                const endX = destino.offsetLeft + destino.offsetWidth / 2;
+                const endY = destino.offsetTop + destino.offsetHeight / 2;
+                animateTruck(startX, startY, endX, endY);
+    });
+
         } catch (error) {
             console.error("Error fetching destinos:", error);
         }
+        
     });
-
 
     function animateTruck(startX, startY, endX, endY) {
         const truck = document.createElement('div');
@@ -178,19 +196,7 @@
         });
     }
 
-    //testear animacion
-    const boton = document.getElementById("animate-btn");
-    boton.addEventListener('click', () => {
-        console.log("Button clicked");
-        const randomDestino = Math.floor(Math.random() * 7) + 1;
-        const destino = document.querySelector(`.destino[id="${randomDestino}"]`);
-        const almacen = document.querySelector('.almacen-central');
-        const startX = almacen.offsetLeft + almacen.offsetWidth / 2;
-        const startY = almacen.offsetTop + almacen.offsetHeight / 2;
-        const endX = destino.offsetLeft + destino.offsetWidth / 2;
-        const endY = destino.offsetTop + destino.offsetHeight / 2;
-        animateTruck(startX, startY, endX, endY);
-    });
+   
 
     document.getElementById("open-modal-btn").addEventListener("click", function () {
     fetch('/hacerpedido')

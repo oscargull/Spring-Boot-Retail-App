@@ -59,13 +59,13 @@ VALUES
 
 INSERT INTO destinos (nombre, distancia, direccion) 
 VALUES
-  ('Madrid', 0.0, 'Puerta del Sol, Madrid, España'),
-  ('Barcelona', 620.5, 'La Rambla, Barcelona, España'),
-  ('Sevilla', 540.3, 'Plaza de España, Sevilla, España'),
-  ('Valencia', 350.2, 'Plaza del Ayuntamiento, Valencia, España'),
-  ('Granada', 430.1, 'Alhambra, Granada, España'),
-  ('Bilbao', 650.7, 'Museo Guggenheim, Bilbao, España'),
-  ('Málaga', 530.4, 'Calle Larios, Málaga, España');
+  ('Madrid', 14, 'Puerta del Sol, Madrid, España'),
+  ('Barcelona', 72, 'La Rambla, Barcelona, España'),
+  ('Sevilla', 54, 'Plaza de España, Sevilla, España'),
+  ('Valencia', 35, 'Plaza del Ayuntamiento, Valencia, España'),
+  ('Granada', 23, 'Alhambra, Granada, España'),
+  ('Bilbao', 65, 'Museo Guggenheim, Bilbao, España'),
+  ('Málaga', 83, 'Calle Larios, Málaga, España');
 
 INSERT INTO productos(nombre, descripcion, categoria, precio, stock)
 VALUES 
