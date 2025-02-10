@@ -40,7 +40,7 @@ public class DestinoController {
     public String viewDestino(@PathVariable Long id, Model model) {
         Destino destino = destinoService.obtenerPorId(id).orElse(null);
         model.addAttribute("destino", destino);
-        return "fragments/modal_destino"; // Return the Thymeleaf template name
+        return "fragments/modal_destino";
     }
 
     @PostMapping("/{id}/delete")
