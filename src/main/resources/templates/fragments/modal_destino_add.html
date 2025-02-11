@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<div class="modal fade" id="modal_destino_add" tabindex="-1" role="dialog" aria-labelledby="modal_destino_addLabel"
+     aria-hidden="true" th:fragment="modal">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal_destino_addLabel">Editar producto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="destinoAddForm" action="#" th:action="@{/creardestino}" th:object="${destino}" method="post">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="col-md-6">
+                <div class="form-group mb-4">
+                  <label for="nombre">Nombre del destino</label>
+                  <input type="text" id="nombre" th:field="*{nombre}" class="form-control"  placeholder="Introduzca el nombre del destino" required>
+                </div>
+
+                <div class="form-group mb-4">
+                  <label for="nombre">Distancia</label>
+                  <input type="number" id="distancia" th:field="*{distancia}" class="form-control" >
+                </div>
+
+                <div class="form-group mb-4">
+                  <label for="nombre">Dirección</label>
+                  <input type="text" id="direccion" th:field="*{direccion}" class="form-control" >
+                </div>
+
+<!--                <div class="form-group mb-4">-->
+<!--                  <label for="tipoSelect">Estado</label>-->
+<!--                  <select id="tipoSelect" name="estado" class="form-control" th:field="*{estado}">-->
+<!--                    <option value="" disabled selected>Seleccione un estado</option>-->
+<!--                    <option th:value="ENVIADO" th:text="Enviado"></option>-->
+<!--                    <option th:value="PLANIFICADO" th:text="Planificado"></option>-->
+<!--                    <option th:value="FINALIZADO" th:text="Finalizado"></option>-->
+<!--                    <option th:value="CANCELADO" th:text="Cancelado"></option>-->
+
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <input type="button" value="Guardar" id="post" onclick="addData()" />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</html>

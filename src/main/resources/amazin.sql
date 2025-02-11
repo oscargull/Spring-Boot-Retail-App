@@ -5,7 +5,7 @@ CREATE TABLE almacenes(
     ocupacion INT DEFAULT 0,
     direccion VARCHAR(255),
 	telefono VARCHAR(20),
-	producto_id BIGINT -- Foreign key here
+	producto_id BIGINT
 );
 
 
@@ -24,6 +24,7 @@ CREATE TABLE productos(
 CREATE TABLE destinos(
 	destino_id BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 	nombre varchar(50) NOT NULL,
+	tipo ENUM('TIENDA','ESCUELA','HOSPITAL','VIVIENDA','GIMNASIO','OFICINA'),
 	distancia double NOT NULL,
 	direccion VARCHAR(255)
 );
@@ -57,15 +58,15 @@ VALUES
     ('Almacén Este', 2000, 800, 'Plaza Mayor 89, Ciudad D', '915678901'),
     ('Almacén Oeste', 3500, 2000, 'Calle del Río 12, Ciudad E', '916789012');
 
-INSERT INTO destinos (nombre, distancia, direccion) 
+INSERT INTO destinos (nombre, tipo, distancia, direccion)
 VALUES
-  ('Madrid', 14, 'Puerta del Sol, Madrid, España'),
-  ('Barcelona', 72, 'La Rambla, Barcelona, España'),
-  ('Sevilla', 54, 'Plaza de España, Sevilla, España'),
-  ('Valencia', 35, 'Plaza del Ayuntamiento, Valencia, España'),
-  ('Granada', 23, 'Alhambra, Granada, España'),
-  ('Bilbao', 65, 'Museo Guggenheim, Bilbao, España'),
-  ('Málaga', 83, 'Calle Larios, Málaga, España');
+  ('Madrid', 'TIENDA', 14, 'Puerta del Sol, Madrid, España'),
+  ('Barcelona', 'VIVIENDA', 72, 'La Rambla, Barcelona, España'),
+  ('Sevilla', 'VIVIENDA', 54, 'Plaza de España, Sevilla, España'),
+  ('Valencia', 'ESCUELA', 35, 'Plaza del Ayuntamiento, Valencia, España'),
+  ('Granada', 'TIENDA', 23, 'Alhambra, Granada, España'),
+  ('Bilbao', 'HOSPITAL', 65, 'Museo Guggenheim, Bilbao, España'),
+  ('Málaga', 'VIVIENDA', 83, 'Calle Larios, Málaga, España');
 
 INSERT INTO productos(nombre, descripcion, categoria, precio, stock)
 VALUES 

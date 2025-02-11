@@ -10,7 +10,7 @@ public interface PedidoServiceInterface {
     public void eliminarPedido(Long id);
 
     public List<Pedido> listarPedidoss();
-    public List<Pedido> listarPorEstado(String categoria);
+    public List<Pedido> listarPorEstado(Pedido.Estado estado);
     public List<Pedido> listarPorAlmacen(Long almacen_id);
     public List<Pedido> listarPorDestino(Long destino_id);
 

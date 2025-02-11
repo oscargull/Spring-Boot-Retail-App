@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <table class="table table-striped table-hover">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Estado</th>
+      <th>Fecha de pedido</th>
+      <th>Fecha prevista de llegada</th>
+      <th>Descripción</th>
+      <th>Almacén</th>
+      <th>Producto/s</th>
+      <th>Destino</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Bucle de la lista de productos -->
+    <tr th:each="pedido :${pedidos}">
+      <td th:text="${pedido.pedido_id}"></td>
+      <td th:text="${pedido.estado}"></td>
+      <td th:text="${pedido.fecha_de_pedido}"></td>
+      <td th:text="${pedido.fecha_de_llegada}"></td>
+      <td th:text="${pedido.descripcion}"></td>
+      <td th:text="${pedido.almacen_id}"></td>
+      <td th:text="${pedido.producto_id}"></td>
+      <td th:text="${pedido.destino_id}"></td>
+      <td class="text-center">
+        <form th:action="@{'/api/pedidos/' + ${pedido.pedido_id}} + '/delete'" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <button class="btn btn-outline-primary">
+            <img th:src="@{delete-icon.png}" alt="Eliminar" width="20" height="20">
+          </button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div th:if="${#lists.isEmpty(pedidos)}">
+    No hay pedidos a mostrar.
+  </div>
+</html>

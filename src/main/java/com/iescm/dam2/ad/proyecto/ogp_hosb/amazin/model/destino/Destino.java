@@ -14,6 +14,9 @@ public class Destino {
     @NotNull(message = "El nombre no puede ser nulo")
     private String nombre;
 
+    @Enumerated(EnumType.STRING)
+    private Tipo tipo;
+
     @NotNull(message = "La distancia no puede ser nula")
     private Double distancia;
 
@@ -36,6 +39,14 @@ public class Destino {
         this.nombre = nombre;
     }
 
+    public Tipo getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
+    }
+
     public Double getDistancia() {
         return distancia;
     }
@@ -50,5 +61,14 @@ public class Destino {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public enum Tipo {
+        TIENDA,
+        ESCUELA,
+        HOSPITAL,
+        VIVIENDA,
+        GIMNASIO,
+        OFICINA
     }
 }

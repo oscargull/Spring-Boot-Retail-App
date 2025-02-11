@@ -44,7 +44,7 @@ public class PedidoService implements PedidoServiceInterface{
     }
 
     @Override
-    public List<Pedido> listarPorEstado(String estado) {
+    public List<Pedido> listarPorEstado(Pedido.Estado estado) {
         return repository.buscarPorEstado(estado);
     }
 
@@ -74,17 +74,14 @@ public class PedidoService implements PedidoServiceInterface{
             return ped;
         }
 
-    // Find Pedido by ID
     public Pedido findPedidoById(Long pedido_id) {
         return repository.findById(pedido_id).orElse(null);
     }
 
-    // Save or update Pedido
     public void save(Pedido pedido) {
         repository.save(pedido);
     }
 
-    // Delete Pedido by ID
     public void delete(Long id) {
         repository.deleteById(id);
     }

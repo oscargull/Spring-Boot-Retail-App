@@ -25,10 +25,10 @@ public class PedidoControllerList {
     }
 
     @GetMapping("/pedidos/estado")
-    public String listarProductosPorEstado(@RequestParam("estado") String estado, Model model){
+    public String listarProductosPorEstado(@RequestParam("estado") Pedido.Estado estado, Model model){
         List<Pedido> pedidos = service.listarPorEstado(estado);
         model.addAttribute("pedidos", pedidos);
-        return "listado_pedidos"; // Devuelve la plantilla "listado.html"
+        return "fragments/modal_tablapedidos";
     }
 
 

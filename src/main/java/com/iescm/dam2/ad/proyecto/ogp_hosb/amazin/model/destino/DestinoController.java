@@ -1,15 +1,13 @@
 package com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.destino;
 
+import com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.almacen.Almacen;
+import com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.pedido.Pedido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.iescm.dam2.ad.proyecto.ogp_hosb.amazin.model.producto.Producto;
 
@@ -51,5 +49,13 @@ public class DestinoController {
         return "listado_destinos";
     }
 
+
+    @RequestMapping(value="/creardestino", method= RequestMethod.POST)
+    public ResponseEntity<Void> hacerPedido(@ModelAttribute("destino") Destino destino, Model model)
+    {
+        destinoService.crearDestino(destino);
+        //model.addAttribute("destino", destino);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
 
 }

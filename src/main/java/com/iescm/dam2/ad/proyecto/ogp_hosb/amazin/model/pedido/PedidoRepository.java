@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 public interface PedidoRepository extends JpaRepository<Pedido, Long>{
 
     @Query("SELECT p FROM Pedido p WHERE p.estado =:estado")
-    List<Pedido> buscarPorEstado(@Param("estado") String estado);
+    List<Pedido> buscarPorEstado(@Param("estado") Pedido.Estado estado);
 
     @Query(value = "SELECT p FROM Pedido WHERE p.almacen_id =:almacen_id", nativeQuery=true)
     List<Pedido> buscarPorAlmacen(@Param("almacen_id") Long almacen_id);
