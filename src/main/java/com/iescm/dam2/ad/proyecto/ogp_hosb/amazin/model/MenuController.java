@@ -10,7 +10,7 @@ public class MenuController {
     public String menuForm(Model model){
 
         //model.addAttribute("menu", menu )
-        return "menu";
+        return "main";
     }
 
     @GetMapping("/main")

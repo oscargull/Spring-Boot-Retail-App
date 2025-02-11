@@ -32,14 +32,17 @@
                   <input type="text" id="direccion" th:field="*{direccion}" class="form-control" >
                 </div>
 
-<!--                <div class="form-group mb-4">-->
-<!--                  <label for="tipoSelect">Estado</label>-->
-<!--                  <select id="tipoSelect" name="estado" class="form-control" th:field="*{estado}">-->
-<!--                    <option value="" disabled selected>Seleccione un estado</option>-->
-<!--                    <option th:value="ENVIADO" th:text="Enviado"></option>-->
-<!--                    <option th:value="PLANIFICADO" th:text="Planificado"></option>-->
-<!--                    <option th:value="FINALIZADO" th:text="Finalizado"></option>-->
-<!--                    <option th:value="CANCELADO" th:text="Cancelado"></option>-->
+                <div class="form-group mb-4">
+                  <label for="tipoSelect">Estado</label>
+                  <select id="tipoSelect" name="tipo" class="form-control" th:field="*{tipo}">
+                    <option value="" disabled selected>Seleccione un tipo</option>
+                    <option th:value="TIENDA" th:text="Tienda"></option>
+                    <option th:value="VIVIENDA" th:text="Vivienda"></option>
+                    <option th:value="OFICINA" th:text="Oficina"></option>
+                    <option th:value="GIMNASIO" th:text="Gimnasio"></option>
+                    <option th:value="HOSPITAL" th:text="Hospital"></option>
+                    <option th:value="ESCUELA" th:text="Escuela"></option>
+
 
                   </select>
                 </div>

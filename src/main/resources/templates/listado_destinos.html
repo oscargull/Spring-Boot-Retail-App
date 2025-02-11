@@ -37,6 +37,7 @@
                 <td th:text="${destino.nombre}"></td>
                 <td th:text="${destino.distancia}"></td>
                 <td th:text="${destino.direccion}"></td>
+                <td th:text="${destino.tipo}"></td>
                 <td class="text-center">
                     <form th:action="@{'/api/destinos/' + ${destino.destino_id}} + '/delete'" method="post">
                         <input type="hidden" name="_method" value="delete">

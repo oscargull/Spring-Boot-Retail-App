@@ -16,9 +16,27 @@
                         <div class="col-md-6">
                             <input type="hidden" th:field="*{almacen_id}" />
                             <div class="col-md-6">
-                                <div class="form-group">
+                                <div class="form-group mb-4">
                                     <label for="nombre">Nombre del destino</label>
                                     <p id="nombre" th:text="*{nombre}" class="form-control-static"></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-4">
+                                    <label for="capacidad">Capacidad máxima</label>
+                                    <p id="capacidad" th:text="*{capacidad_max}" class="form-control-static"></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-4">
+                                    <label for="direccion">Direccion</label>
+                                    <p id="direccion" th:text="*{direccion}" class="form-control-static"></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-4">
+                                    <label for="telefono">TFno.</label>
+                                    <p id="telefono" th:text="*{telefono}" class="form-control-static"></p>
                                 </div>
                             </div>
                         </div>

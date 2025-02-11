@@ -60,23 +60,23 @@
         .almacen { z-index: 2; cursor: pointer; }
 
         .almacen-central img {
-            width: 200px;
+            width: 250px;
             height: auto;
 
         }
 
         .almacen-secundario img {
-            width: 100px;
+            width: 125px;
             height: auto;
         }
         .almacen-central {
-            top: 50vh;
-            left: 50vw;
+            top: 62vh;
+            left: 45vw;
             transform: translate(-50%, -50%);
         }
         .almacen-secundario[id="2"] { top: 16vh; left: 51vw; }
-        .almacen-secundario[id="3"] { bottom: 20vh; left: 43vw; }
-        .almacen-secundario[id="4"] { top: 45vh; right: 15vw; }
+        .almacen-secundario[id="3"] { bottom: 13vh; left: 43vw; }
+        .almacen-secundario[id="4"] { top: 60vh; right: 12vw; }
         .almacen-secundario[id="5"] { top: 44vh; left: 11vw; }
 
 /*        .destino {*/
@@ -88,55 +88,55 @@
 /*        }*/
 
         .destino {
-            position: relative;        /* Make it a positioned container */
+            position: relative;
             display: flex;
-            flex-direction: column;    /* Stack items vertically */
-            justify-content: flex-start; /* Align the content to the top */
-            align-items: center;       /* Center the content horizontally */
-            height: 200px;             /* Adjust height as per the image size */
-            width: 100%;               /* Adjust width based on your container size */
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            height: 200px;
+            width: 100%;
             background-size: cover;
             background-position: center;
-            padding-bottom: 10px;      /* Adjust bottom padding to reduce space below the image */
+            padding-bottom: 10px;
         }
 
         .destino .text {
-            background-color: rgba(0, 0, 0, 0.5);  /* Optional: to give a background behind text */
-            color: white;                          /* Text color */
-            padding: 5px 15px;                     /* Adjust padding around text */
-            width: 100%;                           /* Full width of the container */
-            text-align: center;                    /* Center the text */
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 5px 15px;
+            width: 100%;
+            text-align: center;
             font-size: 16px;
-            font-weight: bold;                     /* Make the text bold */
-            margin-top: 5px;                       /* Adds small space between image and text */
+            font-weight: bold;
+            margin-top: 5px;
         }
 
         .destino-container {
             position: absolute;
-            border: 1px solid red;
             width: 100px;
             height: 100px;
             z-index: 3;
             cursor: pointer;
         }
-        #destino-1 { top: 20vh; left: 30vw; }
-        #destino-2 { top: 40vh; left: 40vw; }
+        #destino-1 { top: 10vh; left: 35vw; }
+        #destino-2 { top: 85vh; left: 20vw; }
         #destino-3 { top: 50vh; left: 50vw; }
-        #destino-4 { top: 60vh; left: 60vw; }
+        #destino-4 { top: 48vh; left: 64vw; }
         #destino-5 { top: 70vh; left: 70vw; }
-        #destino-6 { top: 30vh; left: 20vw; }
+        #destino-6 { top: 20vh; left: 20vw; }
         #destino-7 { top: 50vh; left: 30vw; }
-        #destino-8 { top: 60vh; left: 40vw; }
-        #destino-9 { top: 40vh; left: 60vw; }
-        #destino-10 { top: 30vh; left: 70vw; }
-        #destino-11 { top: 50vh; left: 80vw; }
-        #destino-12 { top: 60vh; left: 90vw; }
+        #destino-8 { top: 15vh; left: 65vw; }
+        #destino-9 { top: 70vh; left: 31vw; }
+        #destino-10 { top: 22vh; left: 87vw; }
+        #destino-11 { top: 85vh; left: 3vw; }
+        #destino-12 { top: 80vh; left: 90vw; }
 
 
         #open-modal-btn {
             position: absolute;
             top: calc(50% + 120px);
-            left: 57%;
+            left: 51%;
+            top:76%;
             transform: translateX(-50%);
             z-index: 1000;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
@@ -198,7 +198,7 @@
     <div class="destino-container" id="destino-12"></div>
 
 
-    <button id="animate-btn">Animacion</button>
+<!--    <button id="animate-btn">Animacion</button>-->
 </div>
 
 <div id="modal-container"></div>
@@ -313,7 +313,7 @@
             { left: `${startX}px`, top: `${startY}px` },
             { left: `${endX}px`, top: `${endY}px` }
         ], {
-            duration: 3000,
+            duration: 8000,
             fill: 'forwards',
             easing: 'linear'
         });
