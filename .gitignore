@@ -4,8 +4,8 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-#ignore database connection string
-src/main/resources/application.properties
+#ignore env file
+#.env
 
 ### STS ###
 .apt_generated

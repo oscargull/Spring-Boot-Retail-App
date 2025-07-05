@@ -1,0 +1,39 @@
+services:
+
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    env_file:
+      .env  # stores passwords
+    environment:
+      SPRING_PROFILES_ACTIVE: docker  # uses application-docker.properties
+      SPRING_DATASOURCE_URL: jdbc:mariadb://mariadb:3306/amazin_db
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+#    depends_on:
+#       mariadb:
+#         condition: service_healthy
+
+
+  mariadb:
+    image: mariadb:latest
+    ports:
+      - "3307:3306"  # mapping container's mariadb port to local 3307
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: amazin_db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    healthcheck: # TODO mariadb healtcheck
+      test: ["CMD-SHELL", "mariadb ping -u root -p$${MYSQL_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    volumes:
+      - db_data:/var/lib/mysql
+#      - ./db_init.sql:/docker-entrypoint-initdb.d/1.sql   # optional db init file
+
+volumes:
+  db_data:
