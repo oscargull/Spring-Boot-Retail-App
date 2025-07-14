@@ -4,7 +4,6 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-#ignore env file
 #.env
 
 ### STS ###
@@ -15,6 +14,20 @@ target/
 .settings
 .springBeans
 .sts4-cache
+
+## React ##
+src/main/react/logs
+src/main/react/*.log
+src/main/react/npm-debug.log*
+src/main/react/yarn-debug.log*
+src/main/react/yarn-error.log*
+#src/main/react/pnpm-debug.log*, src/main/react/lerna-debug.log*
+
+**/node_modules/
+
+src/main/react/dist
+src/main/react/dist-ssr
+src/main/react/*.local
 
 ### IntelliJ IDEA ###
 .idea
