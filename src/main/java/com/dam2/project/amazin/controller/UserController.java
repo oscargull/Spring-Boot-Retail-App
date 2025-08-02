@@ -2,9 +2,9 @@ package com.dam2.project.amazin.controller;
 
 import java.util.Optional;
 
-import com.dam2.project.amazin.model.LoginRequest;
-import com.dam2.project.amazin.model.Usuario;
-import com.dam2.project.amazin.service.UsuarioService;
+import com.dam2.project.amazin.requests.LoginRequest;
+import com.dam2.project.amazin.model.User;
+import com.dam2.project.amazin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.ui.Model;
 
 @Controller
-public class UsuarioController {
+public class UserController {
  @Autowired
-    private UsuarioService usuarioService;
+    private UserService usuarioService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -29,18 +29,18 @@ public class UsuarioController {
 
     @PostMapping("/login")
     public String loginSubmit(@ModelAttribute LoginRequest loginRequest, Model model) {
-        Optional<Usuario> usuarioOpt = usuarioService.findByNomUsuario(loginRequest.getNomUsuario());
+        Optional<User> usuarioOpt = usuarioService.findByUsername(loginRequest.getUsername());
         if(usuarioOpt.isPresent()){
-            Usuario usuario = usuarioOpt.get();
-            if(passwordEncoder.matches(loginRequest.getPassw(), usuario.getPassw())){
-                model.addAttribute("usuario", usuario);
+            User user = usuarioOpt.get();
+            if(passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())){
+                model.addAttribute("usuario", user);
                 return "redirect:/menu"; //Redirigir a la página Productos
             }
             else
             {
                 //model.addAttribute("error", "Contraseña incorrecta.");
                 //return "login";
-                model.addAttribute("usuario", usuario);
+                model.addAttribute("usuario", user);
                 return "redirect:/menu";
             }
         }

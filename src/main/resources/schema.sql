@@ -39,10 +39,34 @@ CREATE TABLE IF NOT EXISTS pedidos(
     FOREIGN KEY (destino_id) REFERENCES destinos(destino_id) ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS roles(
+                                    id BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+                                    name VARCHAR(50) UNIQUE NOT NULL
+    );
+
 CREATE TABLE IF NOT EXISTS usuarios(
     usuario_id BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL ,
     nom_usuario varchar(20) UNIQUE NOT NULL ,
-    passw varchar(255) NOT NULL,
+    password varchar(255) NOT NULL,
     nombre varchar(100),
-    email varchar(100)
+--     role varchar(50),
+    email varchar(100),
+    role_id BIGINT REFERENCES roles(id)
 );
+
+CREATE TABLE IF NOT EXISTS operations(
+    id BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    name VARCHAR(50) UNIQUE NOT NULL
+    );
+
+-- CREATE TABLE role_operation(
+--         role_id BIGINT references roles(id),
+--         operation_id BIGINT references operations(id)
+--         primary key (role_id, operation_id)
+-- );
+
+-- CREATE TABLE user_role(
+--         role_id BIGINT references roles(id),
+--         user_id BIGINT references usuarios(usuario_id)
+--         primary key (role_id, user_id)
+-- );

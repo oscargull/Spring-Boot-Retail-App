@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import Backdrop from './Backdrop.jsx'
 
-const Modal = ({ handleClose, text, isOpen}) => {
+const Modal = ({ handleClose, children, isOpen}) => {
     return (
       <Backdrop
       onClick={handleClose}
@@ -14,7 +14,7 @@ const Modal = ({ handleClose, text, isOpen}) => {
               animate="visible"
               exit="exit"
           >
-              <p>{text}</p>
+              {children}
               <button onClick={handleClose}>Close</button>
           </motion.div>
 

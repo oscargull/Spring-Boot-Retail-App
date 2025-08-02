@@ -5,6 +5,7 @@ import Welcome from "../pages/Welcome.jsx";
 import Backdrop from "../components/Backdrop.jsx";
 import Modal from "../components/Modal.jsx";
 import App from "../App.jsx";
+import LoginForm from "../components/LoginForm.jsx";
 
 const ComponentPreviews = () => {
     return (
@@ -26,6 +27,9 @@ const ComponentPreviews = () => {
             </ComponentPreview>
             <ComponentPreview path="/App">
                 <App/>
+            </ComponentPreview>
+            <ComponentPreview path="/LoginForm">
+                <LoginForm/>
             </ComponentPreview>
         </Previews>
     )

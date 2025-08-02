@@ -1,18 +1,18 @@
 package com.dam2.project.amazin.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.dam2.project.amazin.repository.ProductoRepository;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+
+import java.util.Collection;
 
 @Entity
 @Table(name = "usuarios")
-public class Usuario {
- 
+public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="usuario_id")
@@ -21,12 +21,12 @@ public class Usuario {
     @Column(name="nom_usuario", unique = true)
     @NotNull(message = "EL nombre de usuario no puede ser nulo")
     @Size(min = 5, max = 20, message = "El nombre de usuario solo puede tener entre 2 y 20 caracteres")
-    private String nomUsuario;
+    private String username;
     
-    @Column(name="passw")
+    @Column(name="password")
     @NotNull(message = "La contraseña no puede ser nula")
     @Size(min = 6, max = 255, message = "La contraseña solo puede tener entre  y 255 caracteres.")
-    private String passw;
+    private String password;
     
     @Column(name="nombre")
     @Size(max = 100, message = "Nombre máximo 255 caracteres.")
@@ -35,6 +35,12 @@ public class Usuario {
     @Column(name="email")
     @Size(max = 100, message = "Descripción máximo 255 caracteres.")
     private String email;
+
+    @ManyToOne
+    @JoinColumn(name="role_id")
+    private Role role;
+
+    //private Collection<? extends GrantedAuthority> authorities;
 
 
 
@@ -46,20 +52,20 @@ public class Usuario {
         this.usuario_id = usuario_id;
     }
 
-    public String getNom_usuario() {
-        return nomUsuario;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNom_usuario(String nom_usuario) {
-        this.nomUsuario = nom_usuario;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getPassw() {
-        return passw;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassw(String passw) {
-        this.passw = passw;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getNombre() {
@@ -78,5 +84,11 @@ public class Usuario {
         this.email = email;
     }
 
-    
+    public Role getRole() {
+        return role;
+    }
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
 }

@@ -3,6 +3,7 @@ import {motion, scale, AnimatePresence} from 'framer-motion';
 import '../styles/Welcome.css'
 import AnimatedLogo from '../components/AnimatedLogo.jsx';
 import Modal from "../components/Modal.jsx";
+import LoginForm from "../components/LoginForm.jsx";
 
 function Welcome(){
     const [isModalOpen, setModalOpen] = useState(false);
@@ -23,7 +24,10 @@ function Welcome(){
             </motion.button>
 
             <AnimatePresence>
-                {isModalOpen && <Modal isModalOpen={isModalOpen} handleClose={()=>setModalOpen(false)} text={"test"}/>}
+                {isModalOpen &&
+                    <Modal isModalOpen={isModalOpen} handleClose={()=>setModalOpen(false)}>
+                        <LoginForm/>
+                    </Modal>}
             </AnimatePresence>
 
         </div>

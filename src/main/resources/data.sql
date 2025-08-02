@@ -1,8 +1,16 @@
-INSERT IGNORE INTO usuarios(nom_usuario,passw,email) VALUES
-    ('admin','$2a$12$dLuG3q.fJty6l1gTYLZ2fe2FgsvdmXOQrN7iXfw/q5FwlIy5XRkyi','admin@quandaledingle.com')
+INSERT IGNORE INTO roles(name) VALUES
+        ('ADMIN'),
+       ('USER_DEFAULT'),
+       ('USER_PREMIUM')
+       ON DUPLICATE KEY UPDATE
+           name = VALUES(name);
+
+INSERT IGNORE INTO usuarios(nom_usuario,password,email,role_id) VALUES
+    ('admin','$2a$10$/u7rb64pulmH75HMRiDmmuhYJIu61yJ0abEhSW.FFBBLQefHENH4W','admin@quandaledingle.com',1)
     ON DUPLICATE KEY UPDATE
-            passw = VALUES(passw),
-            email = VALUES(email);
+            password = VALUES(password),
+            email = VALUES(email),
+            role_id = VALUES(role_id);
 
 INSERT IGNORE INTO almacenes (nombre, capacidad_max, ocupacion, direccion, telefono) VALUES
         ('Almacén Central', 5000, 2500, 'Calle Principal 123, Ciudad A', '912345678'),
